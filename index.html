@@ -7,94 +7,64 @@
   <meta name="theme-color" content="#070A0F" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
   <title>IMVpedia Violão</title>
+
   <link rel="manifest" href="./manifest.webmanifest">
-  <link rel="icon" href="./icons/icon-192.png">
+  <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./icons/icon-maskable.svg">
+
   <link rel="stylesheet" href="./styles.css" />
 </head>
+
 <body>
-  <div id="app">
+  <div class="app">
+    <!-- Topbar -->
     <header class="topbar">
-      <div class="brand" role="button" tabindex="0" data-link="#/home" aria-label="Ir para Início">
-        <div class="brandMark" aria-hidden="true">
-          <span class="dot"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-        </div>
+      <div class="brand" role="button" tabindex="0" data-link="#/home">
+        <div class="brandLogo" aria-hidden="true"></div>
         <div class="brandText">
           <div class="brandTitle">IMVpedia Violão</div>
           <div class="brandSub">Violão Popular &amp; Erudito</div>
         </div>
       </div>
 
-      <div class="topbarActions">
-        <button class="btn btnGlass btnSm" id="btnInstall" type="button" hidden>
-          Instalar
-        </button>
-        <button class="btn btnPrimary btnSm" data-link="#/admin" type="button" aria-label="Abrir Admin">
-          Admin
-        </button>
+      <div class="topActions">
+        <button id="btnInstall" class="btn btnGlass" hidden type="button">Instalar</button>
+        <button class="btn btnPrimary" data-link="#/admin" type="button">Admin</button>
       </div>
     </header>
 
-    <main id="view" class="view" aria-live="polite">
-      <!-- Conteúdo renderizado via app.js -->
-    </main>
+    <!-- Main View -->
+    <main id="view" class="view" aria-live="polite"></main>
 
-    <nav class="tabbar" aria-label="Navegação principal">
-      <button class="tab" data-link="#/home" id="tab-home" aria-label="Início">
-        <span class="ico" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-          </svg>
-        </span>
-        <span class="lbl">Início</span>
+    <!-- Toast Host -->
+    <div id="toastHost" class="toastHost" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Tabbar -->
+    <nav class="tabbar" role="navigation" aria-label="Navegação principal">
+      <button class="tab isActive" id="tab-home" data-link="#/home" type="button" aria-label="Início">
+        <span class="tabIcon">⌂</span><span class="tabLabel">Início</span>
       </button>
 
-      <button class="tab" data-link="#/path" id="tab-path" aria-label="Trilha">
-        <span class="ico" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M6 19V5m12 14V5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M9 8h6M9 12h6M9 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </span>
-        <span class="lbl">Trilha</span>
+      <button class="tab" id="tab-path" data-link="#/path" type="button" aria-label="Trilha">
+        <span class="tabIcon">≡</span><span class="tabLabel">Trilha</span>
       </button>
 
-      <button class="tab" data-link="#/missions" id="tab-missions" aria-label="Missões">
-        <span class="ico" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M9 11l2 2 4-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M7 4h10a2 2 0 0 1 2 2v14l-4-2-4 2-4-2-4 2V6a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-          </svg>
-        </span>
-        <span class="lbl">Missões</span>
+      <button class="tab" id="tab-missions" data-link="#/missions" type="button" aria-label="Missões">
+        <span class="tabIcon">☑</span><span class="tabLabel">Missões</span>
       </button>
 
-      <button class="tab" data-link="#/library" id="tab-library" aria-label="Biblioteca">
-        <span class="ico" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M6 4h10a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2V6a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-            <path d="M8.5 8h7M8.5 11h7M8.5 14h5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </span>
-        <span class="lbl">Biblioteca</span>
+      <button class="tab" id="tab-library" data-link="#/library" type="button" aria-label="Biblioteca">
+        <span class="tabIcon">▦</span><span class="tabLabel">Biblioteca</span>
       </button>
 
-      <button class="tab" data-link="#/profile" id="tab-profile" aria-label="Perfil">
-        <span class="ico" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z" stroke="currentColor" stroke-width="1.8"/>
-            <path d="M4 20a8 8 0 0 1 16 0" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-          </svg>
-        </span>
-        <span class="lbl">Perfil</span>
+      <button class="tab" id="tab-profile" data-link="#/profile" type="button" aria-label="Perfil">
+        <span class="tabIcon">👤</span><span class="tabLabel">Perfil</span>
       </button>
     </nav>
-
-    <div class="toastHost" id="toastHost" aria-live="assertive" aria-atomic="true"></div>
   </div>
 
-  <script defer src="./app.js"></script>
+  <script src="./app.js"></script>
 </body>
 </html>
