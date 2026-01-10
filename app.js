@@ -3,7 +3,7 @@
   "use strict";
 
   const APP = {
-    VERSION: "1.0.0",
+    VERSION: "1.0.1",
     CONTENT_URL: "./packs/base/imports/content.json",
     LS: {
       PROFILE: "imv_vla_profile",
@@ -12,17 +12,18 @@
       DONE_LESSONS: "imv_vla_done_lessons",
       ADMIN_DRAFT: "imv_vla_admin_draft",
       CONTENT_CACHE: "imv_vla_content_cache",
+      LIB_SEARCH: "imv_vla_library_search"
     },
     XP: {
       MISSION_DEFAULT: 15,
-      LESSON_STUDY: 20,
+      LESSON_STUDY: 20
     }
   };
 
   // ---------- Utilities ----------
   const $ = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
-  const now = () => Date.now();
+
   const pad2 = (n) => (n < 10 ? "0" + n : "" + n);
 
   const todayKey = () => {
@@ -33,8 +34,11 @@
   const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
 
   function safeJSONParse(str) {
-    try { return { ok: true, value: JSON.parse(str) }; }
-    catch (e) { return { ok: false, error: e }; }
+    try {
+      return { ok: true, value: JSON.parse(str) };
+    } catch (e) {
+      return { ok: false, error: e };
+    }
   }
 
   function lsGet(key, fallback) {
@@ -49,17 +53,20 @@
   }
 
   function lsSet(key, value) {
-    try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+    } catch {}
   }
 
   function uidFrom(title) {
     const base = (title || "item")
       .toLowerCase()
-      .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
       .replace(/[^a-z0-9]+/g, "_")
       .replace(/^_+|_+$/g, "")
       .slice(0, 42) || "item";
-    const stamp = (Date.now().toString(36)).slice(-6);
+    const stamp = Date.now().toString(36).slice(-6);
     return `${base}_${stamp}`;
   }
 
@@ -67,7 +74,9 @@
     const host = $("#toastHost");
     if (!host) return;
     host.innerHTML = `<div class="toast">${msg}</div>`;
-    setTimeout(() => { if (host) host.innerHTML = ""; }, ms);
+    setTimeout(() => {
+      if (host) host.innerHTML = "";
+    }, ms);
   }
 
   function setActiveTab(hash) {
@@ -76,9 +85,9 @@
       "#/path": "#tab-path",
       "#/missions": "#tab-missions",
       "#/library": "#tab-library",
-      "#/profile": "#tab-profile",
+      "#/profile": "#tab-profile"
     };
-    $$(".tabbar .tab").forEach(t => t.classList.remove("isActive"));
+    $$(".tabbar .tab").forEach((t) => t.classList.remove("isActive"));
     const root = (hash || "#/home").split("?")[0];
     const id = map[root] || "#tab-home";
     const el = $(id);
@@ -86,7 +95,6 @@
   }
 
   function linkifyAll() {
-    // Delegated navigation
     document.addEventListener("click", (e) => {
       const target = e.target.closest("[data-link]");
       if (!target) return;
@@ -96,7 +104,6 @@
       navigate(href);
     });
 
-    // Brand keyboard access
     const brand = $(".brand");
     if (brand) {
       brand.addEventListener("keydown", (e) => {
@@ -118,7 +125,7 @@
     const [path, queryString] = raw.split("?");
     const query = {};
     if (queryString) {
-      queryString.split("&").forEach(pair => {
+      queryString.split("&").forEach((pair) => {
         const [k, v] = pair.split("=");
         query[decodeURIComponent(k)] = decodeURIComponent(v || "");
       });
@@ -127,7 +134,8 @@
   }
 
   function escapeHTML(s) {
-    return (s ?? "").toString()
+    return (s ?? "")
+      .toString()
       .replaceAll("&", "&amp;")
       .replaceAll("<", "&lt;")
       .replaceAll(">", "&gt;")
@@ -153,18 +161,23 @@
     };
 
     let inList = false;
-    const openList = () => { if (!inList) { html += "<ul>"; inList = true; } };
-    const closeList = () => { if (inList) { html += "</ul>"; inList = false; } };
+    const openList = () => {
+      if (!inList) {
+        html += "<ul>";
+        inList = true;
+      }
+    };
+    const closeList = () => {
+      if (inList) {
+        html += "</ul>";
+        inList = false;
+      }
+    };
 
     const inline = (s) => {
       let out = escapeHTML(s);
-
-      // bold ** **
       out = out.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
-
-      // inline code `
       out = out.replace(/`([^`]+?)`/g, "<code>$1</code>");
-
       return out;
     };
 
@@ -172,8 +185,11 @@
       const l = line.trimEnd();
 
       if (l.trim() === "```") {
-        if (inPre) { flushPre(); }
-        else { closeList(); inPre = true; }
+        if (inPre) flushPre();
+        else {
+          closeList();
+          inPre = true;
+        }
         continue;
       }
 
@@ -182,9 +198,21 @@
         continue;
       }
 
-      if (/^###\s+/.test(l)) { closeList(); html += `<h3>${inline(l.replace(/^###\s+/, ""))}</h3>`; continue; }
-      if (/^##\s+/.test(l)) { closeList(); html += `<h2>${inline(l.replace(/^##\s+/, ""))}</h2>`; continue; }
-      if (/^#\s+/.test(l)) { closeList(); html += `<h1>${inline(l.replace(/^#\s+/, ""))}</h1>`; continue; }
+      if (/^###\s+/.test(l)) {
+        closeList();
+        html += `<h3>${inline(l.replace(/^###\s+/, ""))}</h3>`;
+        continue;
+      }
+      if (/^##\s+/.test(l)) {
+        closeList();
+        html += `<h2>${inline(l.replace(/^##\s+/, ""))}</h2>`;
+        continue;
+      }
+      if (/^#\s+/.test(l)) {
+        closeList();
+        html += `<h1>${inline(l.replace(/^#\s+/, ""))}</h1>`;
+        continue;
+      }
 
       if (/^-\s+/.test(l)) {
         openList();
@@ -209,27 +237,32 @@
   function levelToRank(level) {
     const map = {
       "Iniciante absoluto": 1,
-      "Iniciante": 2,
-      "Intermediário": 3,
-      "Avançado": 4
+      Iniciante: 2,
+      Intermediário: 3,
+      Avançado: 4
     };
     return map[level] || 2;
   }
 
   function xpToLevel(xp) {
-    // Curva suave: cada nível exige um pouco mais
-    // level 1 começa em 0 XP
     let level = 1;
     let need = 120;
     let remaining = xp;
+
     while (remaining >= need) {
       remaining -= need;
       level += 1;
       need = Math.floor(need * 1.18);
       if (level > 60) break;
     }
-    const progress = need > 0 ? (remaining / need) : 0;
-    return { level, need, remaining, progress: clamp(progress, 0, 1) };
+
+    const progress = need > 0 ? remaining / need : 0;
+    return {
+      level,
+      need,
+      remaining,
+      progress: clamp(progress, 0, 1)
+    };
   }
 
   // ---------- Data Store ----------
@@ -248,16 +281,24 @@
       for (const it of this.content) {
         if (it && it.id) this.byId.set(it.id, it);
       }
-      this.tracks = this.content.filter(x => x.type === "track").sort((a,b) => levelToRank(a.level) - levelToRank(b.level));
-      this.lessons = this.content.filter(x => x.type === "lesson");
-      this.missions = this.content.filter(x => x.type === "mission").sort((a,b) => (b.xp||0) - (a.xp||0));
-      this.library = this.content.filter(x => x.type === "library").sort((a,b) => levelToRank(a.level) - levelToRank(b.level));
+      this.tracks = this.content
+        .filter((x) => x.type === "track")
+        .sort((a, b) => levelToRank(a.level) - levelToRank(b.level));
+      this.lessons = this.content.filter((x) => x.type === "lesson");
+      this.missions = this.content
+        .filter((x) => x.type === "mission")
+        .sort((a, b) => (b.xp || 0) - (a.xp || 0));
+      this.library = this.content
+        .filter((x) => x.type === "library")
+        .sort((a, b) => levelToRank(a.level) - levelToRank(b.level));
     },
 
-    get(id) { return this.byId.get(id); },
+    get(id) {
+      return this.byId.get(id);
+    }
   };
 
-  // ---------- Fallback content (if content.json fails) ----------
+  // ---------- Fallback content ----------
   const FALLBACK_CONTENT = [
     {
       id: "t_fallback_001",
@@ -268,17 +309,15 @@
       level: "Iniciante absoluto",
       tags: ["fallback", "offline", "github"],
       text:
-`# Conteúdo não foi encontrado
-O app não conseguiu carregar \`packs/base/imports/content.json\`.
-
-## Como corrigir
-- Confirme se o arquivo existe exatamente em:
-\`packs/base/imports/content.json\`
-- Em GitHub Pages, espere o deploy terminar e recarregue.
-- Se estiver offline, isso pode ser temporário. Reabra o app.
-
-## Dica
-Você pode abrir o Admin e importar/mesclar um JSON para continuar usando.`,
+        "# Conteúdo não foi encontrado\n" +
+        "O app não conseguiu carregar `packs/base/imports/content.json`.\n\n" +
+        "## Como corrigir\n" +
+        "- Confirme se o arquivo existe exatamente em:\n" +
+        "  `packs/base/imports/content.json`\n" +
+        "- Em GitHub Pages, espere o deploy terminar e recarregue.\n" +
+        "- Se estiver offline, isso pode ser temporário. Reabra o app.\n\n" +
+        "## Dica\n" +
+        "Você pode abrir o Admin e importar/mesclar um JSON para continuar usando.",
       lessonIds: ["l_fallback_001"]
     },
     {
@@ -290,12 +329,11 @@ Você pode abrir o Admin e importar/mesclar um JSON para continuar usando.`,
       level: "Iniciante absoluto",
       tags: ["fallback"],
       text:
-`# App rodando ✅
-Isso é um conteúdo de emergência para garantir que o app nunca fique em branco.
-
-- Vá em **Admin → Importar/Mesclar**
-- Cole o JSON oficial do seu pacote
-- Clique em **Importar e Mesclar**`
+        "# App rodando ✅\n" +
+        "Isso é um conteúdo de emergência para garantir que o app nunca fique em branco.\n\n" +
+        "- Vá em **Admin → Importar/Mesclar**\n" +
+        "- Cole o JSON oficial do seu pacote\n" +
+        "- Clique em **Importar e Mesclar**"
     },
     {
       id: "m_fallback_001",
@@ -306,7 +344,8 @@ Isso é um conteúdo de emergência para garantir que o app nunca fique em branc
       tags: ["fallback"],
       xp: 10,
       minutes: 5,
-      text: "Sente-se bem, ombros soltos, respire e faça 2 minutos de cordas soltas com som limpo."
+      text:
+        "Sente-se bem, ombros soltos, respire e faça 2 minutos de cordas soltas com som limpo."
     },
     {
       id: "a_fallback_001",
@@ -316,13 +355,12 @@ Isso é um conteúdo de emergência para garantir que o app nunca fique em branc
       level: "Iniciante absoluto",
       tags: ["github", "conteudo"],
       text:
-`# Atualizando o conteúdo
-1) Abra o repositório no GitHub  
-2) Vá até \`packs/base/imports/content.json\`  
-3) Cole o conteúdo novo e salve (Commit)  
-4) Recarregue o app
-
-Se você usa GitHub Pages, aguarde o deploy finalizar.`
+        "# Atualizando o conteúdo\n" +
+        "1) Abra o repositório no GitHub\n" +
+        "2) Vá até `packs/base/imports/content.json`\n" +
+        "3) Cole o conteúdo novo e salve (Commit)\n" +
+        "4) Recarregue o app\n\n" +
+        "Se você usa GitHub Pages, aguarde o deploy finalizar."
     }
   ];
 
@@ -330,8 +368,8 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
   const State = {
     profile: lsGet(APP.LS.PROFILE, { name: "Aluno(a)", goal: "Misto" }),
     xp: lsGet(APP.LS.XP, 0),
-    doneMissions: lsGet(APP.LS.DONE_MISSIONS, {}), // { "YYYY-MM-DD": { [missionId]: true } }
-    doneLessons: lsGet(APP.LS.DONE_LESSONS, {}),   // { [lessonId]: "YYYY-MM-DD" }
+    doneMissions: lsGet(APP.LS.DONE_MISSIONS, {}),
+    doneLessons: lsGet(APP.LS.DONE_LESSONS, {}),
     adminDraft: lsGet(APP.LS.ADMIN_DRAFT, []),
 
     saveAll() {
@@ -345,7 +383,6 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
 
   // ---------- Content Load ----------
   async function loadContent() {
-    // Admin may have cached content via import/merge
     const cached = lsGet(APP.LS.CONTENT_CACHE, null);
     if (cached && Array.isArray(cached) && cached.length > 0) {
       Store.loadedFrom = "local";
@@ -368,7 +405,7 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
     }
   }
 
-  // ---------- Progress helpers ----------
+  // ---------- Progress ----------
   function isMissionDoneToday(missionId) {
     const d = todayKey();
     return !!(State.doneMissions[d] && State.doneMissions[d][missionId]);
@@ -424,7 +461,11 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
 
   function itemRowHTML(item, rightHTML = "") {
     const subtitle = item.subtitle ? `<div class="itemSub">${escapeHTML(item.subtitle)}</div>` : "";
-    const tags = (item.tags || []).slice(0, 4).map(t => `<span class="chip">${escapeHTML(t)}</span>`).join("");
+    const tags = (item.tags || [])
+      .slice(0, 4)
+      .map((t) => `<span class="chip">${escapeHTML(t)}</span>`)
+      .join("");
+
     const meta = `
       <div class="itemMeta">
         <span class="badge">${escapeHTML(item.level || "Nível")}</span>
@@ -432,6 +473,7 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
         ${rightHTML}
       </div>
     `;
+
     return `
       <div class="card">
         <div class="cardInner">
@@ -452,9 +494,8 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
     const lvl = xpToLevel(State.xp || 0);
     const prog = Math.round(lvl.progress * 100);
 
-    // Mission of the day: choose first not done today else first
     const missions = Store.missions || [];
-    let mod = missions.find(m => !isMissionDoneToday(m.id)) || missions[0] || null;
+    const mod = missions.find((m) => !isMissionDoneToday(m.id)) || missions[0] || null;
 
     const doneTodayCount = (() => {
       const d = todayKey();
@@ -462,12 +503,14 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
       return Object.keys(map).length;
     })();
 
-    // Quick continue: first track with not complete
     const tracks = Store.tracks || [];
     let continueTrack = null;
     for (const t of tracks) {
       const p = trackProgress(t);
-      if (p.total > 0 && p.done < p.total) { continueTrack = t; break; }
+      if (p.total > 0 && p.done < p.total) {
+        continueTrack = t;
+        break;
+      }
     }
     if (!continueTrack) continueTrack = tracks[0] || null;
 
@@ -536,23 +579,26 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
 
     const weekly = (() => {
       const picks = (Store.missions || []).slice(0, 3);
-      const cards = picks.map(m => {
-        const done = isMissionDoneToday(m.id);
-        const r = done ? `<span class="badge">Concluída hoje</span>` : `<span class="chip">Disponível</span>`;
-        return itemRowHTML(m, r);
-      }).join("");
+      const cards = picks
+        .map((m) => {
+          const done = isMissionDoneToday(m.id);
+          const r = done ? `<span class="badge">Concluída hoje</span>` : `<span class="chip">Disponível</span>`;
+          return itemRowHTML(m, r);
+        })
+        .join("");
       return `
         <div class="h2">Semana (sugestões)</div>
         <div class="grid">${cards || ""}</div>
       `;
     })();
 
-    const sourceNote = Store.loadedFrom === "fallback"
-      ? `<div class="notice" style="margin-top:12px;">
-           <strong>Atenção:</strong> o app entrou em modo fallback porque o arquivo <code>content.json</code> não carregou.
-           Abra o <a class="linkLike" href="#/admin">Admin</a> para importar/mesclar um JSON.
-         </div>`
-      : "";
+    const sourceNote =
+      Store.loadedFrom === "fallback"
+        ? `<div class="notice" style="margin-top:12px;">
+             <strong>Atenção:</strong> o app entrou em modo fallback porque o arquivo <code>content.json</code> não carregou.
+             Abra o <a class="linkLike" href="#/admin">Admin</a> para importar/mesclar um JSON.
+           </div>`
+        : "";
 
     return viewShell(`
       ${hero}
@@ -566,12 +612,14 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
 
   function pathView() {
     const tracks = Store.tracks || [];
-    const list = tracks.map(t => {
-      const p = trackProgress(t);
-      const right = `<span class="chip">${p.done}/${p.total || 0} lições</span><span class="chip">${p.pct}%</span>`;
-      const html = itemRowHTML(t, right);
-      return `<div data-link="#/track?id=${encodeURIComponent(t.id)}" style="cursor:pointer">${html}</div>`;
-    }).join("");
+    const list = tracks
+      .map((t) => {
+        const p = trackProgress(t);
+        const right = `<span class="chip">${p.done}/${p.total || 0} lições</span><span class="chip">${p.pct}%</span>`;
+        const html = itemRowHTML(t, right);
+        return `<div data-link="#/track?id=${encodeURIComponent(t.id)}" style="cursor:pointer">${html}</div>`;
+      })
+      .join("");
 
     return viewShell(`
       <div class="h1">Trilha</div>
@@ -597,11 +645,16 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
 
     const ids = Array.isArray(track.lessonIds) ? track.lessonIds : [];
     const missing = [];
-    const lessons = ids.map(lid => {
-      const l = Store.get(lid);
-      if (!l) { missing.push(lid); return null; }
-      return l;
-    }).filter(Boolean);
+    const lessons = ids
+      .map((lid) => {
+        const l = Store.get(lid);
+        if (!l) {
+          missing.push(lid);
+          return null;
+        }
+        return l;
+      })
+      .filter(Boolean);
 
     const p = trackProgress(track);
 
@@ -615,7 +668,7 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
             <span class="chip">${p.done}/${p.total} lições</span>
             <span class="chip">${p.pct}%</span>
           </div>
-          ${(track.text ? `<div class="sep"></div>${renderMarkdownLite(track.text)}` : "")}
+          ${track.text ? `<div class="sep"></div>${renderMarkdownLite(track.text)}` : ""}
           <div style="margin-top:12px;">
             <div class="progress"><i style="width:${p.pct}%"></i></div>
           </div>
@@ -634,12 +687,14 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
          </div>`
       : "";
 
-    const lessonCards = lessons.map(l => {
-      const done = !!State.doneLessons[l.id];
-      const doneTag = done ? `<span class="badge">Estudada</span>` : `<span class="chip">Nova</span>`;
-      const html = itemRowHTML(l, doneTag);
-      return `<div data-link="#/lesson?id=${encodeURIComponent(l.id)}" style="cursor:pointer">${html}</div>`;
-    }).join("");
+    const lessonCards = lessons
+      .map((l) => {
+        const done = !!State.doneLessons[l.id];
+        const doneTag = done ? `<span class="badge">Estudada</span>` : `<span class="chip">Nova</span>`;
+        const html = itemRowHTML(l, doneTag);
+        return `<div data-link="#/lesson?id=${encodeURIComponent(l.id)}" style="cursor:pointer">${html}</div>`;
+      })
+      .join("");
 
     const empty = `
       <div class="card">
@@ -686,7 +741,7 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
 
           <div class="chips">
             <span class="badge">${escapeHTML(lesson.level || "Nível")}</span>
-            ${(lesson.tags || []).slice(0,6).map(t => `<span class="chip">${escapeHTML(t)}</span>`).join("")}
+            ${(lesson.tags || []).slice(0, 6).map((t) => `<span class="chip">${escapeHTML(t)}</span>`).join("")}
             ${already ? `<span class="chip">Estudada</span>` : `<span class="chip">Nova</span>`}
           </div>
 
@@ -711,38 +766,41 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
     const doneMap = State.doneMissions[d] || {};
     const doneCount = Object.keys(doneMap).length;
 
-    const cards = missions.map(m => {
-      const done = isMissionDoneToday(m.id);
-      const right = done
-        ? `<span class="badge">Concluída hoje</span>`
-        : `<span class="chip">+${escapeHTML(m.xp || APP.XP.MISSION_DEFAULT)} XP</span><span class="chip">${escapeHTML((m.minutes || 7) + " min")}</span>`;
-      const btn = done
-        ? `<button class="btn btnGlass" type="button" disabled style="opacity:.7; cursor:not-allowed;">OK ✅</button>`
-        : `<button class="btn btnPrimary" type="button" data-action="do-mission" data-id="${escapeHTML(m.id)}">Concluir</button>`;
+    const cards = missions
+      .map((m) => {
+        const done = isMissionDoneToday(m.id);
+        const right = done
+          ? `<span class="badge">Concluída hoje</span>`
+          : `<span class="chip">+${escapeHTML(m.xp || APP.XP.MISSION_DEFAULT)} XP</span><span class="chip">${escapeHTML((m.minutes || 7) + " min")}</span>`;
 
-      return `
-        <div class="card">
-          <div class="cardInner">
-            <div class="item">
-              ${coverMiniHTML(m)}
-              <div style="flex:1">
-                <div class="itemTitle">${escapeHTML(m.title || "")}</div>
-                <div class="itemSub">${escapeHTML(m.subtitle || "")}</div>
-                <div class="itemMeta">
-                  <span class="badge">${escapeHTML(m.level || "Nível")}</span>
-                  ${right}
+        const btn = done
+          ? `<button class="btn btnGlass" type="button" disabled style="opacity:.7; cursor:not-allowed;">OK ✅</button>`
+          : `<button class="btn btnPrimary" type="button" data-action="do-mission" data-id="${escapeHTML(m.id)}">Concluir</button>`;
+
+        return `
+          <div class="card">
+            <div class="cardInner">
+              <div class="item">
+                ${coverMiniHTML(m)}
+                <div style="flex:1">
+                  <div class="itemTitle">${escapeHTML(m.title || "")}</div>
+                  <div class="itemSub">${escapeHTML(m.subtitle || "")}</div>
+                  <div class="itemMeta">
+                    <span class="badge">${escapeHTML(m.level || "Nível")}</span>
+                    ${right}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="sep"></div>
-            <div class="p">${escapeHTML(m.text || "")}</div>
-            <div class="row" style="margin-top:12px;">
-              ${btn}
+              <div class="sep"></div>
+              <div class="p">${escapeHTML(m.text || "")}</div>
+              <div class="row" style="margin-top:12px;">
+                ${btn}
+              </div>
             </div>
           </div>
-        </div>
-      `;
-    }).join("");
+        `;
+      })
+      .join("");
 
     return viewShell(`
       <div class="h1">Missões</div>
@@ -758,11 +816,11 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
 
   function libraryView() {
     const items = Store.library || [];
-    const search = lsGet("imv_vla_library_search", "");
+    const search = lsGet(APP.LS.LIB_SEARCH, "");
     const q = (search || "").trim().toLowerCase();
 
     const filtered = q
-      ? items.filter(a => {
+      ? items.filter((a) => {
           const t = (a.title || "").toLowerCase();
           const s = (a.subtitle || "").toLowerCase();
           const tx = (a.text || "").toLowerCase();
@@ -771,10 +829,12 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
         })
       : items;
 
-    const cards = filtered.map(a => {
-      const html = itemRowHTML(a, `<span class="chip">Ler</span>`);
-      return `<div data-link="#/article?id=${encodeURIComponent(a.id)}" style="cursor:pointer">${html}</div>`;
-    }).join("");
+    const cards = filtered
+      .map((a) => {
+        const html = itemRowHTML(a, `<span class="chip">Ler</span>`);
+        return `<div data-link="#/article?id=${encodeURIComponent(a.id)}" style="cursor:pointer">${html}</div>`;
+      })
+      .join("");
 
     return viewShell(`
       <div class="h1">Biblioteca</div>
@@ -815,7 +875,7 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
           <div class="p">${escapeHTML(art.subtitle || "")}</div>
           <div class="chips">
             <span class="badge">${escapeHTML(art.level || "Nível")}</span>
-            ${(art.tags || []).slice(0,8).map(t => `<span class="chip">${escapeHTML(t)}</span>`).join("")}
+            ${(art.tags || []).slice(0, 8).map((t) => `<span class="chip">${escapeHTML(t)}</span>`).join("")}
           </div>
           <div class="sep"></div>
           ${renderMarkdownLite(art.text || "")}
@@ -855,7 +915,7 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
             <div>
               <div class="small">Objetivo</div>
               <select class="select" id="profileGoal">
-                ${goals.map(g => `<option value="${g}" ${State.profile.goal === g ? "selected" : ""}>${g}</option>`).join("")}
+                ${goals.map((g) => `<option value="${g}" ${State.profile.goal === g ? "selected" : ""}>${g}</option>`).join("")}
               </select>
             </div>
           </div>
@@ -900,57 +960,39 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
     `);
   }
 
+  // ---------- Admin ----------
+  let adminActiveTab = "create";
+  let adminExportMode = "draft";
+
   function adminView() {
     const draft = Array.isArray(State.adminDraft) ? State.adminDraft : [];
     const draftCount = draft.length;
 
-    // Build options of lessons for track builder
-    const lessons = Store.content.filter(x => x.type === "lesson").sort((a,b) => levelToRank(a.level) - levelToRank(b.level));
+    const lessons = Store.content
+      .filter((x) => x.type === "lesson")
+      .sort((a, b) => levelToRank(a.level) - levelToRank(b.level));
 
-    const makeLessonOptions = () => lessons.map(l => `<option value="${escapeHTML(l.id)}">${escapeHTML(l.title)} (${escapeHTML(l.level || "")})</option>`).join("");
+    const lessonOptions = lessons
+      .map((l) => `<option value="${escapeHTML(l.id)}">${escapeHTML(l.title)} (${escapeHTML(l.level || "")})</option>`)
+      .join("");
 
-    const exportDraftOnly = () => {
-      return JSON.stringify(draft, null, 2);
-    };
-
-    const exportFullMerged = () => {
-      // merge Store.content + draft with id uniqueness
-      const base = Array.isArray(Store.content) ? Store.content.slice() : [];
-      const baseIds = new Set(base.map(x => x.id));
-      const merged = base.slice();
-
-      for (const it of draft) {
-        if (!it || !it.id) continue;
-        let nid = it.id;
-        if (baseIds.has(nid)) {
-          // rename
-          let i = 2;
-          while (baseIds.has(nid + "_v" + i)) i++;
-          nid = nid + "_v" + i;
-        }
-        baseIds.add(nid);
-        merged.push({ ...it, id: nid });
-      }
-      return JSON.stringify(merged, null, 2);
-    };
-
-    const draftCards = draft.map((it, idx) => {
-      const right = `<span class="chip">${escapeHTML(it.type)}</span><span class="chip">${escapeHTML(it.level || "")}</span>`;
-      const html = itemRowHTML(it, right);
-      return `
-        <div class="card">
-          <div class="cardInner">
-            <div style="display:flex; align-items:center; justify-content:space-between; gap:10px;">
+    const draftCards = draft
+      .map((it, idx) => {
+        const right = `<span class="chip">${escapeHTML(it.type)}</span><span class="chip">${escapeHTML(it.level || "")}</span>`;
+        const html = itemRowHTML(it, right);
+        return `
+          <div class="card">
+            <div class="cardInner">
               <div style="flex:1">${html}</div>
-            </div>
-            <div class="row" style="margin-top:10px;">
-              <button class="btn btnGlass btnSm" type="button" data-action="admin-dup" data-idx="${idx}">Duplicar</button>
-              <button class="btn btnDanger btnSm" type="button" data-action="admin-remove" data-idx="${idx}">Remover</button>
+              <div class="row" style="margin-top:10px;">
+                <button class="btn btnGlass btnSm" type="button" data-action="admin-dup" data-idx="${idx}">Duplicar</button>
+                <button class="btn btnDanger btnSm" type="button" data-action="admin-remove" data-idx="${idx}">Remover</button>
+              </div>
             </div>
           </div>
-        </div>
-      `;
-    }).join("");
+        `;
+      })
+      .join("");
 
     return viewShell(`
       <div class="h1">Admin</div>
@@ -969,9 +1011,7 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
         </div>
       </div>
 
-      <div id="adminTabs" style="margin-top:12px;">
-        <!-- Tabs injected -->
-      </div>
+      <div id="adminTabs" style="margin-top:12px;"></div>
 
       <template id="tplAdminCreate">
         <div class="card hero">
@@ -1023,7 +1063,7 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
               <div id="adTrackBox" style="grid-column:1 / -1; display:none;">
                 <div class="small">Para track: selecione lições (lessonIds)</div>
                 <select class="select" id="adLessonPicker" multiple size="8" style="height:auto; padding:10px;">
-                  ${makeLessonOptions()}
+                  ${lessonOptions}
                 </select>
                 <div class="small" style="margin-top:6px;">Dica: segure Ctrl (PC) / toque múltiplo (mobile varia) para selecionar mais de uma.</div>
               </div>
@@ -1043,7 +1083,7 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
 
               <div style="grid-column:1 / -1;">
                 <div class="small">Texto (conteúdo principal)</div>
-                <textarea class="textarea" id="adText" placeholder="# Título&#10;## Passo a passo&#10;- Item&#10;&#10;Use ``` para tablatura/cifras"></textarea>
+                <textarea class="textarea" id="adText" placeholder="# Título&#10;## Passo a passo&#10;- Item&#10;&#10;Use &#96;&#96;&#96; para tablatura/cifras"></textarea>
               </div>
             </div>
 
@@ -1127,22 +1167,18 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
         </div>
       </template>
     `);
-
-    // We inject actual tab content on route render (after DOM set)
-    // We'll store export functions in closures by re-computing on mount.
   }
-
-  // ---------- Admin helpers ----------
-  let adminActiveTab = "create";
-  let adminExportMode = "draft";
 
   function adminMount() {
     const host = $("#adminTabs");
     if (!host) return;
 
-    const tplId = adminActiveTab === "create" ? "#tplAdminCreate"
-      : adminActiveTab === "export" ? "#tplAdminExport"
-      : "#tplAdminImport";
+    const tplId =
+      adminActiveTab === "create"
+        ? "#tplAdminCreate"
+        : adminActiveTab === "export"
+        ? "#tplAdminExport"
+        : "#tplAdminImport";
 
     const tpl = $(tplId);
     if (!tpl) return;
@@ -1150,7 +1186,6 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
 
     if (adminActiveTab === "create") adminMountCreate();
     if (adminActiveTab === "export") adminMountExport();
-    if (adminActiveTab === "import") adminMountImport();
   }
 
   function adminMountCreate() {
@@ -1160,52 +1195,12 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
 
     const refreshType = () => {
       const v = type.value;
-      trackBox.style.display = (v === "track") ? "block" : "none";
-      missionBox.style.display = (v === "mission") ? "block" : "none";
+      if (trackBox) trackBox.style.display = v === "track" ? "block" : "none";
+      if (missionBox) missionBox.style.display = v === "mission" ? "block" : "none";
     };
 
-    type.addEventListener("change", refreshType);
+    if (type) type.addEventListener("change", refreshType);
     refreshType();
-  }
-
-  function adminBuildExportJSON(mode) {
-    const draft = Array.isArray(State.adminDraft) ? State.adminDraft : [];
-    if (mode === "draft") return JSON.stringify(draft, null, 2);
-
-    const base = Array.isArray(Store.content) ? Store.content.slice() : [];
-    const baseIds = new Set(base.map(x => x.id));
-    const merged = base.slice();
-
-    let renamed = 0;
-    for (const it of draft) {
-      if (!it || !it.id) continue;
-      let nid = it.id;
-      if (baseIds.has(nid)) {
-        let i = 2;
-        while (baseIds.has(nid + "_v" + i)) i++;
-        nid = nid + "_v" + i;
-        renamed++;
-      }
-      baseIds.add(nid);
-      merged.push({ ...it, id: nid });
-    }
-
-    return JSON.stringify(merged, null, 2);
-  }
-
-  function adminMountExport() {
-    const area = $("#adExportArea");
-    const chip = $("#adExportModeChip");
-    const update = () => {
-      const json = adminBuildExportJSON(adminExportMode);
-      area.value = json;
-      chip.textContent = "Modo: " + (adminExportMode === "draft" ? "rascunho" : "pacote completo");
-    };
-    update();
-  }
-
-  function adminMountImport() {
-    // no-op; report updates via actions
   }
 
   function adminValidateItem(item) {
@@ -1224,17 +1219,49 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
     return errors;
   }
 
+  function adminBuildExportJSON(mode) {
+    const draft = Array.isArray(State.adminDraft) ? State.adminDraft : [];
+    if (mode === "draft") return JSON.stringify(draft, null, 2);
+
+    const base = Array.isArray(Store.content) ? Store.content.slice() : [];
+    const baseIds = new Set(base.map((x) => x.id));
+    const merged = base.slice();
+
+    for (const it of draft) {
+      if (!it || !it.id) continue;
+      let nid = it.id;
+      if (baseIds.has(nid)) {
+        let i = 2;
+        while (baseIds.has(nid + "_v" + i)) i++;
+        nid = nid + "_v" + i;
+      }
+      baseIds.add(nid);
+      merged.push({ ...it, id: nid });
+    }
+
+    return JSON.stringify(merged, null, 2);
+  }
+
+  function adminMountExport() {
+    const area = $("#adExportArea");
+    const chip = $("#adExportModeChip");
+    if (!area || !chip) return;
+
+    area.value = adminBuildExportJSON(adminExportMode);
+    chip.textContent = "Modo: " + (adminExportMode === "draft" ? "rascunho" : "pacote completo");
+  }
+
   function adminAddFromForm() {
-    const type = $("#adType").value;
-    const level = $("#adLevel").value;
-    const title = ($("#adTitle").value || "").trim();
-    const subtitle = ($("#adSubtitle").value || "").trim();
-    const cover = ($("#adCover").value || "").trim();
-    const tagsRaw = ($("#adTags").value || "").trim();
-    const text = ($("#adText").value || "").trim();
+    const type = $("#adType")?.value;
+    const level = $("#adLevel")?.value;
+    const title = ($("#adTitle")?.value || "").trim();
+    const subtitle = ($("#adSubtitle")?.value || "").trim();
+    const cover = ($("#adCover")?.value || "").trim();
+    const tagsRaw = ($("#adTags")?.value || "").trim();
+    const text = ($("#adText")?.value || "").trim();
 
     const tags = tagsRaw
-      ? tagsRaw.split(",").map(s => s.trim()).filter(Boolean).slice(0, 20)
+      ? tagsRaw.split(",").map((s) => s.trim()).filter(Boolean).slice(0, 20)
       : [];
 
     const item = {
@@ -1245,7 +1272,7 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
       cover,
       level,
       tags,
-      text,
+      text
     };
 
     if (!subtitle) delete item.subtitle;
@@ -1254,23 +1281,22 @@ Se você usa GitHub Pages, aguarde o deploy finalizar.`
 
     if (type === "track") {
       const picker = $("#adLessonPicker");
-      const selected = Array.from(picker.selectedOptions).map(o => o.value);
+      const selected = picker ? Array.from(picker.selectedOptions).map((o) => o.value) : [];
       item.lessonIds = selected;
       if (!item.text) {
         item.text =
-`# Sobre este módulo
-Explique o objetivo do módulo e o que o aluno deve dominar ao final.
-
-## Como estudar
-- Faça as lições na ordem
-- Use metrônomo
-- Anote dúvidas e volte aqui depois`;
+          "# Sobre este módulo\n" +
+          "Explique o objetivo do módulo e o que o aluno deve dominar ao final.\n\n" +
+          "## Como estudar\n" +
+          "- Faça as lições na ordem\n" +
+          "- Use metrônomo\n" +
+          "- Anote dúvidas e volte aqui depois";
       }
     }
 
     if (type === "mission") {
-      const xp = Number($("#adMissionXP").value || APP.XP.MISSION_DEFAULT);
-      const minutes = Number($("#adMissionMin").value || 7);
+      const xp = Number($("#adMissionXP")?.value || APP.XP.MISSION_DEFAULT);
+      const minutes = Number($("#adMissionMin")?.value || 7);
       item.xp = clamp(xp, 1, 500);
       item.minutes = clamp(minutes, 1, 180);
       if (!item.text) item.text = "Descreva o passo a passo da missão, com foco em consistência.";
@@ -1290,12 +1316,18 @@ Explique o objetivo do módulo e o que o aluno deve dominar ao final.
   }
 
   function adminClearForm() {
-    const ids = ["adTitle","adSubtitle","adCover","adTags","adText"];
-    ids.forEach(i => { const el = $("#" + i); if (el) el.value = ""; });
+    ["adTitle", "adSubtitle", "adCover", "adTags", "adText"].forEach((id) => {
+      const el = $("#" + id);
+      if (el) el.value = "";
+    });
     const picker = $("#adLessonPicker");
-    if (picker) Array.from(picker.options).forEach(o => (o.selected = false));
-    const xp = $("#adMissionXP"); if (xp) xp.value = APP.XP.MISSION_DEFAULT;
-    const mn = $("#adMissionMin"); if (mn) mn.value = 7;
+    if (picker) Array.from(picker.options).forEach((o) => (o.selected = false));
+
+    const xp = $("#adMissionXP");
+    if (xp) xp.value = APP.XP.MISSION_DEFAULT;
+    const mn = $("#adMissionMin");
+    if (mn) mn.value = 7;
+
     toast("Formulário limpo.");
   }
 
@@ -1336,7 +1368,6 @@ Explique o objetivo do módulo e o que o aluno deve dominar ao final.
   }
 
   function adminSaveAsLocalContent() {
-    // Save exported JSON (mode) as content cache used by app
     const json = adminBuildExportJSON(adminExportMode);
     const parsed = safeJSONParse(json);
     if (!parsed.ok || !Array.isArray(parsed.value)) {
@@ -1381,9 +1412,8 @@ Explique o objetivo do módulo e o que o aluno deve dominar ao final.
       return;
     }
 
-    // Base is current Store.content, but prefer local cache if exists
     const base = Array.isArray(Store.content) ? Store.content.slice() : [];
-    const ids = new Set(base.map(x => x.id));
+    const ids = new Set(base.map((x) => x.id));
     let inserted = 0;
     let renamed = 0;
     let ignored = 0;
@@ -1392,18 +1422,18 @@ Explique o objetivo do módulo e o que o aluno deve dominar ao final.
     const out = base.slice();
 
     for (const it0 of arr) {
-      if (!it0 || typeof it0 !== "object") { ignored++; continue; }
-
+      if (!it0 || typeof it0 !== "object") {
+        ignored++;
+        continue;
+      }
       const it = { ...it0 };
       if (!it.id || typeof it.id !== "string") it.id = uidFrom(it.title || "item");
 
-      // normalize minimal fields
       if (!it.type || !it.title || !it.level) {
         invalid++;
         continue;
       }
 
-      // Avoid duplicates
       let nid = it.id;
       if (ids.has(nid)) {
         let i = 2;
@@ -1413,7 +1443,6 @@ Explique o objetivo do módulo e o que o aluno deve dominar ao final.
         renamed++;
       }
 
-      // Validate type-specific requirements (soft)
       const errs = adminValidateItem(it);
       if (errs.length) {
         invalid++;
@@ -1425,14 +1454,12 @@ Explique o objetivo do módulo e o que o aluno deve dominar ao final.
       inserted++;
     }
 
-    // Persist as local content cache
     lsSet(APP.LS.CONTENT_CACHE, out);
 
     const summary = `Importação concluída: inseridos=${inserted}, renomeados=${renamed}, inválidos=${invalid}, ignorados=${ignored}.`;
     if (report) report.textContent = summary;
     toast(`<strong>OK!</strong> ${escapeHTML(summary)}`);
 
-    // Reload so Store uses local cache
     setTimeout(() => location.reload(), 450);
   }
 
@@ -1467,25 +1494,23 @@ Explique o objetivo do módulo e o que o aluno deve dominar ao final.
 
     view.innerHTML = html;
 
-    // After render hooks
     if (path === "#/admin") adminMount();
 
-    // Bind dynamic inputs
     const libSearch = $("#libSearch");
     if (libSearch) {
       libSearch.addEventListener("input", (e) => {
-        lsSet("imv_vla_library_search", e.target.value || "");
-        // no heavy debounce needed; still light
+        lsSet(APP.LS.LIB_SEARCH, e.target.value || "");
         render();
       });
     }
   }
 
-  // ---------- Global Actions ----------
+  // ---------- Actions ----------
   function bindActions() {
     document.addEventListener("click", (e) => {
       const a = e.target.closest("[data-action]");
       if (!a) return;
+
       const action = a.getAttribute("data-action");
       const id = a.getAttribute("data-id");
       const idx = a.getAttribute("data-idx");
@@ -1502,7 +1527,7 @@ Explique o objetivo do módulo e o que o aluno deve dominar ao final.
       if (action === "do-mission") {
         e.preventDefault();
         const m = Store.get(id);
-        const xpAdd = (m && m.xp) ? m.xp : APP.XP.MISSION_DEFAULT;
+        const xpAdd = m && m.xp ? m.xp : APP.XP.MISSION_DEFAULT;
         const res = markMissionDone(id, xpAdd);
         if (res.ok) {
           toast(`<strong>+${xpAdd} XP</strong> Missão concluída ✅`);
@@ -1526,7 +1551,6 @@ Explique o objetivo do módulo e o que o aluno deve dominar ao final.
         return;
       }
 
-      // Profile
       if (action === "save-profile") {
         e.preventDefault();
         const name = ($("#profileName")?.value || "Aluno(a)").trim();
@@ -1548,12 +1572,12 @@ Explique o objetivo do módulo e o que o aluno deve dominar ao final.
         localStorage.removeItem(APP.LS.DONE_LESSONS);
         localStorage.removeItem(APP.LS.ADMIN_DRAFT);
         localStorage.removeItem(APP.LS.CONTENT_CACHE);
+        localStorage.removeItem(APP.LS.LIB_SEARCH);
         toast("Reset concluído. Recarregando…");
         setTimeout(() => location.reload(), 450);
         return;
       }
 
-      // Admin
       if (action === "admin-tab") {
         e.preventDefault();
         adminActiveTab = tab || "create";
@@ -1588,11 +1612,7 @@ Explique o objetivo do módulo e o que o aluno deve dominar ao final.
       if (action === "admin-export-mode") {
         e.preventDefault();
         adminExportMode = mode === "full" ? "full" : "draft";
-        adminMount(); // re-mount export tab content
-        const area = $("#adExportArea");
-        const chip = $("#adExportModeChip");
-        if (area) area.value = adminBuildExportJSON(adminExportMode);
-        if (chip) chip.textContent = "Modo: " + (adminExportMode === "draft" ? "rascunho" : "pacote completo");
+        adminMount();
         toast("Modo de exportação alterado.");
         return;
       }
@@ -1630,20 +1650,18 @@ Explique o objetivo do módulo e o que o aluno deve dominar ao final.
       }
     });
 
-    // Track type change logic inside admin is mounted in adminMountCreate
     document.addEventListener("change", (e) => {
-      // When admin form type changes, show/hide boxes
       if (e.target && e.target.id === "adType") {
         const v = e.target.value;
         const trackBox = $("#adTrackBox");
         const missionBox = $("#adMissionBox");
-        if (trackBox) trackBox.style.display = (v === "track") ? "block" : "none";
-        if (missionBox) missionBox.style.display = (v === "mission") ? "block" : "none";
+        if (trackBox) trackBox.style.display = v === "track" ? "block" : "none";
+        if (missionBox) missionBox.style.display = v === "mission" ? "block" : "none";
       }
     });
   }
 
-  // ---------- PWA install ----------
+  // ---------- Install Prompt ----------
   function setupInstallPrompt() {
     let deferredPrompt = null;
     const btn = $("#btnInstall");
@@ -1658,7 +1676,9 @@ Explique o objetivo do módulo e o que o aluno deve dominar ao final.
       btn.addEventListener("click", async () => {
         if (!deferredPrompt) return;
         deferredPrompt.prompt();
-        try { await deferredPrompt.userChoice; } catch {}
+        try {
+          await deferredPrompt.userChoice;
+        } catch {}
         deferredPrompt = null;
         btn.hidden = true;
       });
@@ -1670,7 +1690,6 @@ Explique o objetivo do módulo e o que o aluno deve dominar ao final.
     if (!("serviceWorker" in navigator)) return;
     try {
       const reg = await navigator.serviceWorker.register("./sw.js");
-      // Optional update hint
       reg.addEventListener("updatefound", () => {
         const nw = reg.installing;
         if (!nw) return;
@@ -1680,9 +1699,7 @@ Explique o objetivo do módulo e o que o aluno deve dominar ao final.
           }
         });
       });
-    } catch {
-      // Do nothing; app must still work
-    }
+    } catch {}
   }
 
   // ---------- Boot ----------
@@ -1693,9 +1710,7 @@ Explique o objetivo do módulo e o que o aluno deve dominar ao final.
     await setupSW();
 
     const load = await loadContent();
-    if (!load.ok) {
-      toast("<strong>Aviso:</strong> content.json falhou — usando fallback.");
-    }
+    if (!load.ok) toast("<strong>Aviso:</strong> content.json falhou — usando fallback.");
 
     window.addEventListener("hashchange", render);
     if (!location.hash) location.hash = "#/home";
