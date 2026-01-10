@@ -1,286 +1,418 @@
-// packs/base/imports/content.json
 [
   {
-    "id": "t_postura_001",
+    "id": "track_postura_pegada_som",
     "type": "track",
-    "title": "Módulo 1 — Postura, pegada e som",
-    "subtitle": "Base sólida: conforto, prevenção de dor e som limpo.",
+    "title": "Módulo 1 — Postura, Pegada e Som",
+    "subtitle": "Base absoluta para tocar com conforto, controle e um timbre bonito.",
     "cover": "",
     "level": "Iniciante absoluto",
-    "tags": ["postura", "mãos", "som", "fundamentos"],
-    "text": "# Objetivo\nConstruir uma base confortável e eficiente para tocar com bom som.\n\n## Você vai dominar\n- Postura sentada (popular e erudita)\n- Pegada correta do instrumento\n- Mão direita: ataque e controle\n- Mão esquerda: pressão mínima sem ruído\n\n## Como estudar\n- 10 min por dia já muda tudo\n- Use som limpo antes de velocidade\n- Grave 20 segundos e compare semanalmente",
-    "lessonIds": ["l_postura_001", "l_maodireita_001", "l_maoesquerda_001"]
+    "tags": ["base", "postura", "som", "saude", "tecnica"],
+    "text": "# Objetivo do módulo\nConstruir uma base sólida: postura, apoio do violão, alinhamento corporal, relaxamento e qualidade do som.\n\n## Como estudar\n- Faça as lições em ordem\n- Toque devagar e com atenção ao som\n- Pausas curtas evitam tensão\n\n## Resultado esperado\nVocê toca cordas soltas e exercícios simples com **som limpo**, sem dor e com controle.",
+    "lessonIds": [
+      "lesson_postura_sentado_pe",
+      "lesson_mao_direita_apoiada_livre",
+      "lesson_mao_esquerda_polegar_pressao",
+      "lesson_ataque_som_ruido",
+      "lesson_rotina_5_min_saude"
+    ]
   },
   {
-    "id": "t_ritmo_001",
+    "id": "track_ritmo_batidas_popular",
     "type": "track",
-    "title": "Módulo 2 — Ritmo e batidas (popular)",
-    "subtitle": "Groove, precisão e levada. O violão popular vive aqui.",
+    "title": "Módulo 2 — Ritmo e Batidas (Popular)",
+    "subtitle": "Groove, constância e coordenação para acompanhar músicas com segurança.",
     "cover": "",
     "level": "Iniciante",
-    "tags": ["ritmo", "batidas", "levada", "metrônomo"],
-    "text": "# Objetivo\nGanhar consistência rítmica e tocar batidas populares com segurança.\n\n## Você vai dominar\n- Contagem e subdivisão (1 e 2 e 3 e 4 e)\n- Alternância polegar/indicador (base)\n- Batidas com acento e dinâmica\n\n## Regra de ouro\nSe o ritmo estiver firme, metade da música já está pronta.",
-    "lessonIds": ["l_ritmo_001", "l_batida_001", "l_acento_001"]
+    "tags": ["ritmo", "batidas", "popular", "levadas", "metrônomo"],
+    "text": "# Objetivo do módulo\nDesenvolver mão direita consistente: batidas básicas, acentos, subdivisão e troca de acordes sem travar.\n\n## Como estudar\n- Use metrônomo (bem devagar)\n- Grave 30 segundos para conferir constância\n- Treine mudanças de acordes separadas do ritmo\n\n## Resultado esperado\nVocê acompanha músicas simples com batidas sólidas e tempo estável.",
+    "lessonIds": [
+      "lesson_subdivisao_4_4",
+      "lesson_batida_basica_pop_1",
+      "lesson_batida_basica_pop_2",
+      "lesson_acento_dinamica",
+      "lesson_troca_acordes_sem_parar"
+    ]
   },
   {
-    "id": "t_harmonia_001",
+    "id": "track_acordes_campo_harmonico",
     "type": "track",
-    "title": "Módulo 3 — Acordes e campo harmônico (popular)",
-    "subtitle": "Montagem de acordes, progressões e prática musical.",
+    "title": "Módulo 3 — Acordes e Campo Harmônico (Popular)",
+    "subtitle": "Construção prática de acordes, funções e progressões reais.",
     "cover": "",
     "level": "Intermediário",
-    "tags": ["acordes", "campo harmônico", "progressões", "cifras"],
-    "text": "# Objetivo\nEntender como os acordes funcionam e como tocar progressões populares.\n\n## Você vai dominar\n- Tríades e tétrades (no contexto do violão)\n- Campo harmônico maior (I ii iii IV V vi vii°)\n- Cadências comuns (I–V–vi–IV, ii–V–I)\n\n## Dica\nTroque acordes devagar e sem tensão. A velocidade vem depois.",
-    "lessonIds": ["l_acordes_001", "l_campo_001", "l_pestana_001"]
+    "tags": ["harmonia", "acordes", "triades", "tetrades", "campo harmonico", "cifras"],
+    "text": "# Objetivo do módulo\nEntender e aplicar acordes na prática: tríades, tétrades, funções (T/S/D) e progressões mais usadas.\n\n## Como estudar\n- Toque a progressão e cante a tônica\n- Troque voicings mantendo notas comuns\n- Use uma música real como laboratório\n\n## Resultado esperado\nVocê entende o que está tocando e cria acompanhamentos melhores.",
+    "lessonIds": [
+      "lesson_leitura_cifras",
+      "lesson_formacao_triades",
+      "lesson_formacao_tetrades",
+      "lesson_funcoes_tsd",
+      "lesson_progressao_ii_v_i"
+    ]
   },
   {
-    "id": "t_erudito_001",
+    "id": "track_leitura_arpejos_tecnica_erudito",
     "type": "track",
-    "title": "Módulo 4 — Leitura, arpejos e técnica (erudito)",
-    "subtitle": "Mão direita clássica, leitura e controle de timbre.",
+    "title": "Módulo 4 — Leitura, Arpejos e Técnica (Erudito)",
+    "subtitle": "Mão direita refinada, arpejos, ligados e leitura básica para repertório erudito.",
     "cover": "",
     "level": "Intermediário",
-    "tags": ["erudito", "arpejo", "leitura", "técnica"],
-    "text": "# Objetivo\nConstruir técnica e musicalidade do violão erudito com leitura e arpejos.\n\n## Você vai dominar\n- Dedos p-i-m-a (mão direita)\n- Arpejos básicos e padrões\n- Leitura simples em 1ª posição\n- Dinâmica: piano/forte e controle de timbre",
-    "lessonIds": ["l_pima_001", "l_arpejos_001", "l_leitura_001"]
+    "tags": ["erudito", "leitura", "arpejo", "pima", "ligados", "tremolo"],
+    "text": "# Objetivo do módulo\nDesenvolver técnica clássica: padrão PIMA, arpejos, ligados, apoio/livre e leitura rítmica/melódica.\n\n## Como estudar\n- Metrônomo lento, som uniforme\n- Foque em relaxamento e economia de movimento\n- Estude em blocos (mão direita / mão esquerda / junto)\n\n## Resultado esperado\nVocê executa arpejos com regularidade e toca peças simples com clareza.",
+    "lessonIds": [
+      "lesson_pima_basico",
+      "lesson_arpejos_3_padroes",
+      "lesson_ligados_hammer_pulloff",
+      "lesson_leitura_ritmica_basica",
+      "lesson_tremolo_introducao"
+    ]
   },
   {
-    "id": "t_performance_001",
+    "id": "track_repertorio_performance",
     "type": "track",
-    "title": "Módulo 5 — Repertório e performance",
-    "subtitle": "Tocar inteiro, com começo–meio–fim, e soar confiante.",
+    "title": "Módulo 5 — Repertório e Performance",
+    "subtitle": "Como estudar música de verdade, memorizar, tocar limpo e se apresentar.",
     "cover": "",
     "level": "Avançado",
-    "tags": ["repertório", "performance", "palco", "gravação"],
-    "text": "# Objetivo\nTransformar estudo em música tocada com presença.\n\n## Você vai dominar\n- Montar repertório por objetivo\n- Aquecimento rápido pré-performance\n- Estratégias anti-branco\n- Gravação e autoavaliação",
-    "lessonIds": ["l_repertorio_001", "l_performance_001", "l_estudo_001"]
+    "tags": ["repertorio", "performance", "memorizacao", "palco", "gravacao"],
+    "text": "# Objetivo do módulo\nTransformar estudo em música: montagem de repertório, técnicas de memorização, preparação para gravação e apresentação.\n\n## Como estudar\n- Divida a música em seções\n- Use repetição inteligente (3 acertos seguidos)\n- Simule performance (toque do início ao fim)\n\n## Resultado esperado\nVocê toca músicas completas com segurança e consistência.",
+    "lessonIds": [
+      "lesson_metodo_3_3_3",
+      "lesson_memorizacao_blocos",
+      "lesson_estudo_com_metrônomo",
+      "lesson_preparacao_gravacao",
+      "lesson_performance_sem_travar"
+    ]
   },
 
   {
-    "id": "l_postura_001",
+    "id": "lesson_postura_sentado_pe",
     "type": "lesson",
-    "title": "Postura: popular vs erudito (sem dor, com som)",
-    "subtitle": "Ajustes simples que mudam seu som e sua evolução.",
+    "title": "Postura: sentado e em pé (sem dor)",
+    "subtitle": "Apoio do violão, coluna neutra, ombros soltos e estabilidade.",
     "cover": "",
     "level": "Iniciante absoluto",
-    "tags": ["postura", "ergonomia", "som"],
-    "text": "# Postura que funciona\nA postura serve a 2 coisas: **conforto** e **controle**.\n\n## Popular (mais comum)\n- Violão apoiado na perna direita (destros)\n- Braço direito relaxado, sem esmagar o tampo\n- Punhos neutros (evite dobrar demais)\n\n## Erudito (clássico)\n- Violão elevado na perna esquerda (apoio/pedestal)\n- Instrumento mais centralizado\n- Acesso melhor às casas altas\n\n## Checklist rápido\n- Ombros baixos\n- Pescoço longo (não “encaixa” a cabeça)\n- Mão esquerda empurra pouco: pressione só o necessário\n\n### Mini exercício (2 min)\n- Toque cordas soltas bem devagar\n- Busque som limpo e constante\n- Se doer: ajuste a altura do instrumento e relaxe o ombro"
+    "tags": ["postura", "saude", "iniciante"],
+    "text": "# Postura correta (sem dor)\n\n## Sentado\n- Sente-se na metade da cadeira (não afunde)\n- Coluna neutra, peito aberto sem rigidez\n- Ombros soltos\n- O violão apoia na perna (clássico na esquerda com apoio; popular costuma ser na direita)\n\n## Em pé\n- Correia na altura em que você consegue tocar relaxado\n- Evite violão muito baixo (tensiona punho e ombro)\n\n## Checklist rápido\n- Dor no ombro? Ajuste altura e relaxe\n- Punho dobrado demais? Suba o violão\n- Som ruim? Talvez a mão direita esteja tensa\n\n**Meta:** 2 minutos de cordas soltas com respiração calma e sem tensão."
   },
   {
-    "id": "l_maodireita_001",
+    "id": "lesson_mao_direita_apoiada_livre",
     "type": "lesson",
-    "title": "Mão direita: ataque, timbre e consistência",
-    "subtitle": "Som limpo vem de controle (não de força).",
+    "title": "Mão direita: ataque apoiado vs. livre",
+    "subtitle": "Entenda a diferença e use para controlar timbre.",
     "cover": "",
     "level": "Iniciante absoluto",
-    "tags": ["mão direita", "timbre", "controle"],
-    "text": "# Onde você toca muda o som\n- Perto da ponte: som mais brilhante\n- Perto da boca: som mais cheio\n\n## Popular (palheta/dedos)\n- Se for palheta: mantenha o punho leve e use movimentos curtos\n- Se for dedos: ataque com consistência, sem “puxar” demais\n\n## Erudito (unhas/dedos)\n- p (polegar) tem peso e profundidade\n- i-m-a devem soar equilibrados\n\n### Exercício (5 min)\n1) Toque 1 corda por vez: 6→1→6\n2) Som igual em todas\n3) Se variar, diminua o movimento\n\nDica: grave 20s e compare depois."
+    "tags": ["mao direita", "timbre", "erudito", "tecnica"],
+    "text": "# Ataque apoiado x ataque livre\n\n## Ataque livre (tirando)\nA corda é puxada e o dedo não repousa na corda de baixo.\n- Timbre mais leve\n- Muito usado em arpejos\n\n## Ataque apoiado (apoyando)\nDepois de tocar, o dedo repousa na corda de baixo.\n- Timbre mais forte e projetado\n- Ótimo para melodia (erudito)\n\n## Exercício (5 min)\n1) Toque 1ª corda com i (livre) 10 vezes — som igual\n2) Repita com ataque apoiado 10 vezes\n3) Alterne: 2 livres, 2 apoiados\n\n**Dica:** som uniforme é mais importante que velocidade."
   },
   {
-    "id": "l_maoesquerda_001",
+    "id": "lesson_mao_esquerda_polegar_pressao",
     "type": "lesson",
-    "title": "Mão esquerda: pressão mínima, som máximo",
-    "subtitle": "Evite tensão: ela atrasa sua evolução.",
+    "title": "Mão esquerda: polegar e pressão mínima",
+    "subtitle": "Como evitar dor e melhorar a afinação do acorde.",
     "cover": "",
     "level": "Iniciante absoluto",
-    "tags": ["mão esquerda", "pressão", "técnica"],
-    "text": "# A regra da pressão mínima\nVocê não precisa esmagar a corda. Precisa de **posição certa**.\n\n## Ajustes que resolvem ruído\n- Dedos perto do traste (sem encostar no metal)\n- Polegar atrás do braço, sem apertar como alicate\n- Punho neutro\n\n### Exercício (4 min)\n- Faça um acorde simples (Em)\n- Aperte forte (note a tensão)\n- Agora alivie aos poucos até começar a trastejar\n- Volte um “grau” e memorize esse ponto\n\nVocê acabou de achar sua pressão eficiente."
+    "tags": ["mao esquerda", "pressao", "dor", "acordes"],
+    "text": "# Pressão mínima (o segredo do conforto)\n\n## Princípio\nVocê não precisa apertar forte: precisa **posicionar bem**.\n\n## Regras\n- Polegar atrás do braço, sem esmagar\n- Use a ponta do dedo perto do traste (não no meio)\n- Alinhe o dedo, evite encostar em cordas vizinhas\n\n## Mini teste\n1) Aperte uma nota e toque\n2) Vá soltando lentamente até começar a trastejar\n3) Aperte só um pouco acima do ponto de trastejar\n\n**Objetivo:** conseguir som limpo com o mínimo de força."
+  },
+  {
+    "id": "lesson_ataque_som_ruido",
+    "type": "lesson",
+    "title": "Som limpo: eliminando ruídos",
+    "subtitle": "Trastejamento, corda abafada, ruído de dedo e como corrigir.",
+    "cover": "",
+    "level": "Iniciante absoluto",
+    "tags": ["som limpo", "ruidos", "timbre"],
+    "text": "# Tipos comuns de ruído\n\n## 1) Trastejamento\n- Dedo longe do traste\n- Pressão insuficiente\n- Punho torto\n\n**Correção:** aproxime do traste e ajuste ângulo do dedo.\n\n## 2) Corda abafada\n- Dedo encostando na corda vizinha\n\n**Correção:** use a ponta do dedo e mantenha arco nos dedos.\n\n## 3) Ruído de arrasto\n- Mão esquerda arrastando forte\n\n**Correção:** levante minimamente o dedo ao trocar.\n\n## Exercício\nToque um acorde simples e verifique corda por corda. Ajuste até ficar 100% limpo."
+  },
+  {
+    "id": "lesson_rotina_5_min_saude",
+    "type": "lesson",
+    "title": "Rotina diária de 5 minutos (saúde + técnica)",
+    "subtitle": "Aquecimento rápido para tocar melhor e prevenir lesões.",
+    "cover": "",
+    "level": "Iniciante absoluto",
+    "tags": ["rotina", "aquecimento", "saude"],
+    "text": "# Rotina de 5 minutos\n\n1) **Respiração e relaxamento (30s)**\n- Ombros soltos, respiração lenta\n\n2) **Cordas soltas (1 min)**\n- Som uniforme, sem acelerar\n\n3) **Cromático leve (2 min)**\n- 1-2-3-4 em uma corda devagar\n\n4) **Acorde simples + troca (1 min)**\n- Troque sem travar\n\n5) **Final: 30s de música real**\n- Algo fácil, só para sentir prazer\n\n**Regra de ouro:** pare se houver dor aguda."
   },
 
   {
-    "id": "l_ritmo_001",
+    "id": "lesson_subdivisao_4_4",
     "type": "lesson",
-    "title": "Ritmo: contagem e subdivisão (o que é '1 e 2 e')",
-    "subtitle": "Ritmo firme é o superpoder do violão popular.",
+    "title": "Subdivisão no 4/4: tempo e contratempo",
+    "subtitle": "Aprenda a contar e sentir a base do ritmo popular.",
     "cover": "",
     "level": "Iniciante",
-    "tags": ["ritmo", "subdivisão", "metrônomo"],
-    "text": "# Subdivisão\nQuando você conta **1 e 2 e 3 e 4 e**, você divide cada tempo em 2.\n\n## Por que isso importa\n- Você aprende onde entram os ataques\n- Você controla pausas\n- Você toca junto com outras pessoas\n\n### Exercício (5 min)\n1) Bata palma em 1-2-3-4\n2) Depois: fale “1 e 2 e 3 e 4 e”\n3) Toque cordas soltas só no **1**\n4) Depois, toque no **1 e**\n\nDica: metrônomo lento vence pressa."
+    "tags": ["ritmo", "4/4", "subdivisao", "metrônomo"],
+    "text": "# 4/4 na prática\n\nConte assim: **1 e 2 e 3 e 4 e**\n\n- Números = tempos\n- \"e\" = contratempo (meio do tempo)\n\n## Exercício (5–8 min)\n1) Bata o pé nos números\n2) Palmas no \"e\"\n3) No violão: toque corda solta nos números e depois nos \"e\"\n\n**Objetivo:** manter constância sem acelerar."
   },
   {
-    "id": "l_batida_001",
+    "id": "lesson_batida_basica_pop_1",
     "type": "lesson",
-    "title": "Batida base: para começar a tocar músicas",
-    "subtitle": "Uma levada simples que funciona em centenas de músicas.",
+    "title": "Batida Popular 1 (base universal)",
+    "subtitle": "Modelo simples para acompanhar dezenas de músicas.",
     "cover": "",
     "level": "Iniciante",
-    "tags": ["batida", "levada", "popular"],
-    "text": "# Batida base (modelo)\nUse como esqueleto:\n\n``` \n1   e   2   e   3   e   4   e\n↓       ↓↑      ↑   ↓↑\n```\n\n## Como praticar\n- Primeiro só os movimentos (sem tocar)\n- Depois toque cordas soltas\n- Depois aplique em 2 acordes (Em → G)\n\n### Dica\nO segredo é **mão direita constante** — mesmo quando você não ataca as cordas."
+    "tags": ["batida", "popular", "levada"],
+    "text": "# Batida Popular 1\n\n## Padrão sugerido (4/4)\n- **Baixo (tempo 1)**\n- **↓ (2)**\n- **↑ (e do 2)**\n- **↓ (3)**\n- **↓↑ (4 e)**\n\n## Exercício\n- Faça primeiro em cordas soltas\n- Depois em um acorde (Em)\n\n**Dica:** o braço faz o movimento contínuo. Você só decide quando encosta nas cordas."
   },
   {
-    "id": "l_acento_001",
+    "id": "lesson_batida_basica_pop_2",
     "type": "lesson",
-    "title": "Acento e dinâmica: faça a levada 'andar'",
-    "subtitle": "Sem acento, tudo soa igual. Com acento, vira música.",
+    "title": "Batida Popular 2 (com pausa e groove)",
+    "subtitle": "Aprenda a criar sensação de balanço.",
     "cover": "",
     "level": "Iniciante",
-    "tags": ["acento", "dinâmica", "groove"],
-    "text": "# O que é acento\nAcento é dar mais energia (ou destaque) em pontos específicos.\n\n## Exemplo simples\n- Acentue o tempo 2 e 4 (sensação pop)\n- Ou acentue o 1 (sensação mais “quadrada”)\n\n### Exercício (6 min)\n- Faça a batida base\n- Acentue o **2** e o **4**\n- Grave e ouça: deve soar mais “dançante”\n\nDica: acento é mais sobre **timing** do que força."
+    "tags": ["batida", "groove", "pausa", "popular"],
+    "text": "# Batida Popular 2\n\nA pausa é tão importante quanto tocar.\n\n## Ideia\n- Faça um **abafamento** (mão direita encosta levemente) em um dos tempos.\n\n## Exercício\n1) Em cordas soltas, toque ↓ no 1\n2) Faça pausa/abafado no 2\n3) Toque ↓ no 3\n4) Toque ↓↑ no 4 e\n\n**Objetivo:** soar \"musical\", não mecânico."
+  },
+  {
+    "id": "lesson_acento_dinamica",
+    "type": "lesson",
+    "title": "Acento e dinâmica: tocando com vida",
+    "subtitle": "Como destacar batidas e criar direção musical.",
+    "cover": "",
+    "level": "Iniciante",
+    "tags": ["dinamica", "acento", "musicalidade"],
+    "text": "# Acento e dinâmica\n\nSem dinâmica, tudo soa igual.\n\n## Regra simples\n- Escolha um tempo para ser mais forte (ex.: 2 e 4)\n- Mantenha os outros mais suaves\n\n## Exercício\nToque uma batida simples e faça:\n- tempo 2 forte\n- tempo 4 forte\n\n**Dica:** dinâmica vem do controle, não de força bruta."
+  },
+  {
+    "id": "lesson_troca_acordes_sem_parar",
+    "type": "lesson",
+    "title": "Troca de acordes sem parar o ritmo",
+    "subtitle": "O segredo é preparar antes e reduzir movimentos.",
+    "cover": "",
+    "level": "Iniciante",
+    "tags": ["acordes", "troca", "ritmo", "coordenação"],
+    "text": "# Trocas sem travar\n\n## Técnica principal\n- **Prepare** dedos no ar antes de pousar\n- Procure um **dedo âncora** (nota comum) quando existir\n\n## Exercício (6 min)\n1) Faça 2 batidas em Em\n2) Troque para G (sem tocar)\n3) Faça 2 batidas em G\n4) Volte para Em\n\n**Regra:** se travar, diminua o tempo e mantenha o movimento do braço."
   },
 
   {
-    "id": "l_acordes_001",
+    "id": "lesson_leitura_cifras",
     "type": "lesson",
-    "title": "Acordes no violão: como formar e entender",
-    "subtitle": "Acorde é empilhamento de notas. Violão é organização.",
+    "title": "Leitura de cifras: o que significam os símbolos",
+    "subtitle": "Entenda maior, menor, 7, m7, sus, dim e mais.",
     "cover": "",
     "level": "Intermediário",
-    "tags": ["acordes", "tríades", "tétrades", "cifras"],
-    "text": "# Tríades (base)\n- Maior: 1–3–5\n- Menor: 1–b3–5\n\n## No violão\nVocê costuma repetir notas e omitir algumas. Tudo bem, desde que a função permaneça.\n\n### Exemplo\n- C (Dó maior): C–E–G\n- Am (Lá menor): A–C–E\n\n## Prática\n- Toque o acorde\n- Identifique a nota mais grave (baixo)\n- Troque para outra inversão quando possível\n\nDica: **baixo bem escolhido** deixa a harmonia sofisticada."
+    "tags": ["cifras", "acordes", "harmonia"],
+    "text": "# Cifras (guia rápido)\n\n- **C** = Dó maior\n- **Cm** = Dó menor\n- **C7** = Dó com sétima menor (dominante)\n- **Cmaj7** = Dó com sétima maior\n- **Cm7** = Dó menor com sétima menor\n- **Csus2 / Csus4** = suspenso (sem a terça)\n- **Cdim** = diminuto\n- **Caug** = aumentado\n\n## Dica prática\nSe você entende a cifra, você consegue **montar o acorde** em diferentes posições (voicings)."
   },
   {
-    "id": "l_campo_001",
+    "id": "lesson_formacao_triades",
     "type": "lesson",
-    "title": "Campo harmônico maior (popular na prática)",
-    "subtitle": "Entenda por que certos acordes 'combinam'.",
+    "title": "Formação de tríades (1–3–5)",
+    "subtitle": "Como construir acordes maiores e menores.",
     "cover": "",
     "level": "Intermediário",
-    "tags": ["campo harmônico", "progressões", "harmonia"],
-    "text": "# Campo harmônico maior\nEm uma tonalidade maior, os acordes diatônicos seguem um padrão:\n\n- I (maior)\n- ii (menor)\n- iii (menor)\n- IV (maior)\n- V (maior)\n- vi (menor)\n- vii° (diminuto)\n\n## Exemplo em G (Sol maior)\nG, Am, Bm, C, D, Em, F#°\n\n### Progressões clássicas\n- I–V–vi–IV\n- ii–V–I\n\nPratique com batida lenta e trocas limpas."
+    "tags": ["triades", "harmonia", "acordes"],
+    "text": "# Tríades\n\nUma tríade tem:\n- **1 (tônica)**\n- **3 (terça)**\n- **5 (quinta)**\n\n## Maior\n1–3 maior–5\n\n## Menor\n1–3 menor–5\n\n## Exercício\nEscolha uma tonalidade (ex.: C) e monte:\n- C (C–E–G)\n- Am (A–C–E)\n\n**Objetivo:** entender que acorde é um conjunto de notas, não só um desenho."
   },
   {
-    "id": "l_pestana_001",
+    "id": "lesson_formacao_tetrades",
     "type": "lesson",
-    "title": "Pestana sem dor: técnica real (não força bruta)",
-    "subtitle": "Ajuste de ângulo, ponto de pressão e economia de movimento.",
+    "title": "Formação de tétrades (acordes com 7ª)",
+    "subtitle": "maj7, 7, m7 e meio diminuto na prática.",
     "cover": "",
     "level": "Intermediário",
-    "tags": ["pestana", "técnica", "mão esquerda"],
-    "text": "# Pestana sem sofrimento\nPestana é **alavanca + posição**, não força.\n\n## Ajustes que destravam\n- Aproximar o dedo do traste\n- Usar a lateral do indicador (não a parte “mole”)\n- Polegar atrás do braço como apoio, sem apertar demais\n- Cotovelo ligeiramente para frente\n\n### Exercício (7 min)\n1) Faça pestana só com indicador (sem acorde)\n2) Toque cordas 1 e 2 limpas\n3) Adicione a corda 3\n4) Só depois monte o acorde completo\n\nDica: 3 tentativas boas valem mais que 30 ruins."
-  },
-
-  {
-    "id": "l_pima_001",
-    "type": "lesson",
-    "title": "P-I-M-A: base da mão direita clássica",
-    "subtitle": "Independência, equilíbrio e timbre.",
-    "cover": "",
-    "level": "Intermediário",
-    "tags": ["erudito", "pima", "mão direita"],
-    "text": "# Dedos\n- p = polegar\n- i = indicador\n- m = médio\n- a = anelar\n\n## Postura de mão\n- Mão “redonda”, sem colapsar\n- p ligeiramente à frente dos outros dedos\n- i/m/a atacam com controle\n\n### Exercício (6 min)\nToque padrão em cordas soltas:\n\n```\np  i  m  a\n6  3  2  1\n```\n\nDepois varie:\n\n```\np  m  i  a\n6  2  3  1\n```\n\nDica: busque som igual entre i/m/a."
+    "tags": ["tetrades", "7", "acordes", "harmonia"],
+    "text": "# Tétrades\n\nTétrade = tríade + 7ª.\n\n## Tipos comuns\n- **maj7**: 1–3–5–7\n- **7 (dominante)**: 1–3–5–b7\n- **m7**: 1–b3–5–b7\n- **m7(b5)**: 1–b3–b5–b7\n\n## Exercício\nEm Dó maior, monte:\n- Cmaj7\n- G7\n- Dm7\n- Bm7(b5)"
   },
   {
-    "id": "l_arpejos_001",
+    "id": "lesson_funcoes_tsd",
     "type": "lesson",
-    "title": "Arpejos: padrões essenciais e musicalidade",
-    "subtitle": "Arpejo é acorde em movimento — e isso é lindo.",
+    "title": "Funções harmônicas: Tônica, Subdominante, Dominante",
+    "subtitle": "Como entender progressões e criar sentido musical.",
     "cover": "",
     "level": "Intermediário",
-    "tags": ["arpejo", "erudito", "coordenação"],
-    "text": "# Padrões base\nComece lento e perfeito.\n\n## Padrão 1\n```\np i m a\n6 3 2 1\n```\n\n## Padrão 2\n```\np i m i\n6 3 2 3\n```\n\n## Como praticar\n- 60 bpm\n- 1 minuto cada padrão\n- Foco em timbre igual\n\nDica: dinâmica (mais suave/mais forte) é parte do estudo."
+    "tags": ["funcoes", "tsd", "harmonia", "progressao"],
+    "text": "# Funções T/S/D\n\n## Tônica (T)\nSensação de repouso: I (ex.: C)\n\n## Subdominante (S)\nMovimento para longe: ii, IV (ex.: Dm, F)\n\n## Dominante (D)\nTensão que pede resolução: V, vii° (ex.: G7)\n\n## Exemplo\nC (T) → F (S) → G7 (D) → C (T)\n\n**Objetivo:** ouvir a função enquanto toca."
   },
   {
-    "id": "l_leitura_001",
+    "id": "lesson_progressao_ii_v_i",
     "type": "lesson",
-    "title": "Leitura no violão (1ª posição): começo sem medo",
-    "subtitle": "Leitura simples, aplicada ao instrumento.",
+    "title": "Progressão ii–V–I (o coração do popular/jazz)",
+    "subtitle": "Entenda e toque em qualquer tonalidade.",
     "cover": "",
     "level": "Intermediário",
-    "tags": ["leitura", "erudito", "partitura"],
-    "text": "# Leitura é mapa\nVocê lê alturas + ritmo. No violão, a mesma nota pode existir em mais de um lugar.\n\n## Começo prático\n- Use 1ª posição\n- Priorize cordas soltas e casas 1–3\n\n### Exercício (7 min)\n1) Toque cordas soltas com contagem\n2) Adicione notas nas casas 1 e 2\n3) Faça frases curtas e repita\n\nDica: leitura melhora quando você canta o ritmo antes de tocar."
+    "tags": ["ii-v-i", "progressao", "harmonia"],
+    "text": "# ii–V–I\n\nEm Dó maior:\n- ii = Dm7\n- V = G7\n- I = Cmaj7\n\n## Exercício\n1) Toque Dm7 → G7 → Cmaj7\n2) Depois faça em Sol maior: Am7 → D7 → Gmaj7\n\n**Dica:** tente cantar a tônica do I enquanto toca."
   },
 
   {
-    "id": "l_repertorio_001",
+    "id": "lesson_pima_basico",
     "type": "lesson",
-    "title": "Repertório: como escolher músicas que te fazem evoluir",
-    "subtitle": "Repertório certo acelera tudo.",
+    "title": "PIMA básico (erudito): coordenação de dedos",
+    "subtitle": "P (polegar), I, M, A com regularidade e som uniforme.",
+    "cover": "",
+    "level": "Intermediário",
+    "tags": ["pima", "erudito", "arpejo", "tecnica"],
+    "text": "# PIMA\n\n- **P** = polegar (cordas graves)\n- **I** = indicador\n- **M** = médio\n- **A** = anelar\n\n## Exercício\nToque devagar:\n- P (6ª) – I (3ª) – M (2ª) – A (1ª)\n\n**Meta:** todas as notas com o mesmo volume e timbre."
+  },
+  {
+    "id": "lesson_arpejos_3_padroes",
+    "type": "lesson",
+    "title": "Arpejos: 3 padrões essenciais",
+    "subtitle": "PIMA e variações para repertório erudito/popular dedilhado.",
+    "cover": "",
+    "level": "Intermediário",
+    "tags": ["arpejo", "pima", "dedilhado"],
+    "text": "# 3 padrões\n\n## Padrão 1\nP–I–M–A\n\n## Padrão 2\nP–M–I–M\n\n## Padrão 3\nP–A–M–I\n\n## Como treinar\n- 60 bpm, depois 70, 80…\n- Som igual, sem correr\n\n**Dica:** não levante demais os dedos."
+  },
+  {
+    "id": "lesson_ligados_hammer_pulloff",
+    "type": "lesson",
+    "title": "Ligados: Hammer-on e Pull-off",
+    "subtitle": "Clareza, força mínima e som equilibrado.",
+    "cover": "",
+    "level": "Intermediário",
+    "tags": ["ligados", "hammer-on", "pull-off", "tecnica"],
+    "text": "# Ligados\n\n## Hammer-on\nBata o dedo com firmeza (sem esmagar) para soar sem palhetada.\n\n## Pull-off\nPuxe levemente a corda ao soltar para manter volume.\n\n## Exercício\nEm uma corda:\n- 5h7 (hammer)\n- 7p5 (pull)\n\n**Meta:** volume parecido com nota palhetada."
+  },
+  {
+    "id": "lesson_leitura_ritmica_basica",
+    "type": "lesson",
+    "title": "Leitura rítmica básica",
+    "subtitle": "Semínima, colcheia, pausa e contagem simples.",
+    "cover": "",
+    "level": "Intermediário",
+    "tags": ["leitura", "ritmo", "erudito"],
+    "text": "# Leitura rítmica\n\n## Valores\n- Semínima = 1 tempo\n- Colcheia = meio tempo\n- Pausas têm o mesmo valor\n\n## Exercício\nConte em voz alta:\n- 1 2 3 4\n- 1 e 2 e 3 e 4 e\n\nDepois toque corda solta seguindo a contagem."
+  },
+  {
+    "id": "lesson_tremolo_introducao",
+    "type": "lesson",
+    "title": "Tremolo: introdução (p–a–m–i)",
+    "subtitle": "Controle e regularidade antes de velocidade.",
+    "cover": "",
+    "level": "Intermediário",
+    "tags": ["tremolo", "erudito", "tecnica"],
+    "text": "# Tremolo\n\nPadrão clássico: **P–A–M–I**\n\n## Exercício\n- P na corda grave\n- A–M–I na 1ª corda\n\nComece extremamente lento.\n\n**Meta:** sequência uniforme, sem \"buracos\" no som."
+  },
+
+  {
+    "id": "lesson_metodo_3_3_3",
+    "type": "lesson",
+    "title": "Método 3–3–3: consertando trechos difíceis",
+    "subtitle": "Um jeito simples e poderoso de estabilizar execução.",
     "cover": "",
     "level": "Avançado",
-    "tags": ["repertório", "evolução", "planejamento"],
-    "text": "# Repertório inteligente\nEscolha 3 tipos:\n- 1 música fácil (conforto)\n- 1 média (desafio)\n- 1 difícil (sonho)\n\n## Critérios\n- Técnica específica (pestana, arpejo, ritmo)\n- Musicalidade (dinâmica, fraseado)\n- Motivação real\n\nDica: toque a música inteira devagar, sem parar, 1x por dia."
+    "tags": ["repertorio", "metodo", "performance"],
+    "text": "# Método 3–3–3\n\nPara um trecho difícil:\n1) Toque **3 vezes bem devagar**\n2) Toque **3 vezes no tempo médio**\n3) Toque **3 vezes no tempo alvo**\n\nSe errar, volte um passo.\n\n**Objetivo:** consistência sem ansiedade."
   },
   {
-    "id": "l_performance_001",
+    "id": "lesson_memorizacao_blocos",
     "type": "lesson",
-    "title": "Performance: tocar com confiança (e sem travar)",
-    "subtitle": "Tocar é diferente de estudar. Treine o contexto.",
+    "title": "Memorização por blocos",
+    "subtitle": "Como memorizar sem depender só de repetição cega.",
     "cover": "",
     "level": "Avançado",
-    "tags": ["performance", "palco", "confiança"],
-    "text": "# Treino de performance\n- Toque do começo ao fim sem parar\n- Simule erro: continue mesmo errando\n\n## Anti-branco\n- Tenha “pontos de ancoragem” (trechos fáceis)\n- Respire antes de começar\n- Conte 1 compasso mental\n\n### Mini rotina (8 min)\n1) 2 min aquecimento\n2) 4 min tocar inteiro\n3) 2 min corrigir só 1 trecho\n\nDica: gravar e assistir é desconfortável, mas transforma."
+    "tags": ["memorizacao", "repertorio"],
+    "text": "# Memorização por blocos\n\nDivida a música em 4–8 seções.\n\nPara cada seção:\n- Identifique o acorde principal\n- Identifique a nota inicial e final\n- Toque começando do meio (não só do início)\n\n**Meta:** conseguir iniciar em qualquer seção."
   },
   {
-    "id": "l_estudo_001",
+    "id": "lesson_estudo_com_metrônomo",
     "type": "lesson",
-    "title": "Rotina de estudo: 20 minutos que realmente funcionam",
-    "subtitle": "Estrutura simples, resultado consistente.",
+    "title": "Estudo com metrônomo (sem travar)",
+    "subtitle": "Como aumentar BPM com segurança e musicalidade.",
     "cover": "",
     "level": "Avançado",
-    "tags": ["rotina", "estudo", "planejamento"],
-    "text": "# Estrutura 20 minutos\n## 1) Aquecer (3 min)\nCordas soltas, som limpo, relaxar.\n\n## 2) Técnica (7 min)\nUm exercício só, lento e perfeito.\n\n## 3) Música (8 min)\nToque repertório — trecho difícil primeiro.\n\n## 4) Fechar (2 min)\nToque algo fácil para sair bem.\n\nDica: consistência vence intensidade."
+    "tags": ["metronomo", "tempo", "performance"],
+    "text": "# Metrônomo sem sofrimento\n\n## Regras\n- Suba só 2–4 bpm por vez\n- Faça 3 execuções limpas antes de subir\n- Se errar, desça 4 bpm e reconstrua\n\n**Dica:** o metrônomo é seu treinador, não seu inimigo."
+  },
+  {
+    "id": "lesson_preparacao_gravacao",
+    "type": "lesson",
+    "title": "Preparação para gravação",
+    "subtitle": "Como gravar melhor com o mesmo nível técnico.",
+    "cover": "",
+    "level": "Avançado",
+    "tags": ["gravacao", "performance", "estudio"],
+    "text": "# Preparação\n\n## Antes de gravar\n- Aqueça 5–10 min\n- Grave 3 takes inteiros\n- Escolha o melhor e ajuste pontos específicos\n\n## Durante\n- Respiração calma\n- Pense em musicalidade, não em perfeição\n\n**Meta:** tocar uma versão sólida e musical do início ao fim."
+  },
+  {
+    "id": "lesson_performance_sem_travar",
+    "type": "lesson",
+    "title": "Performance sem travar",
+    "subtitle": "Como lidar com nervosismo e manter fluxo musical.",
+    "cover": "",
+    "level": "Avançado",
+    "tags": ["performance", "palco", "mente"],
+    "text": "# Performance\n\n## Técnica: pontos de ancoragem\nMarque 3–5 lugares na música onde você sabe exatamente o que acontece.\n\n## Estratégia\n- Se errar, **não pare**\n- Volte para o pulso e continue\n\n**Meta:** tocar com fluxo e presença."
   },
 
   {
-    "id": "a_unhas_palheta_001",
+    "id": "lib_unhas_x_palheta",
     "type": "library",
-    "title": "Unhas x palheta: como escolher (e cuidar)",
-    "subtitle": "Som, conforto e estilo de violão.",
+    "title": "Unhas x Palheta: o que muda e como escolher",
+    "subtitle": "Timbre, controle, conforto e cuidados.",
+    "cover": "",
     "level": "Iniciante",
     "tags": ["unhas", "palheta", "timbre", "cuidados"],
-    "text": "# Unhas x Palheta\nA escolha depende de **timbre**, **repertório** e **conforto**.\n\n## Palheta (popular)\n- Ataque definido\n- Ótima para batidas e levadas\n- Exige controle para não soar duro\n\n## Unhas (erudito / fingerstyle)\n- Mais variação de timbre\n- Arpejos com clareza\n- Requer cuidado e manutenção\n\n## Cuidados básicos\n- Lixar (não cortar “quadrado” demais)\n- Evitar lascas\n- Ajustar formato para seu ataque\n\nDica: mesmo com unhas, pratique som com a polpa do dedo para controle."
+    "text": "# Unhas x Palheta\n\n## Palheta\n- Ataque mais definido\n- Ótima para pop/rock\n- Controle de dinâmica depende da mão\n\n## Unhas (ou polpa + unha)\n- Timbre mais rico e articulado\n- Muito usado no erudito e dedilhados\n- Exige cuidado e manutenção\n\n## Dica prática\nSe você quer **misto (popular + erudito)**, treine:\n- palheta para levadas\n- dedos para arpejos\n\n## Cuidados\n- Hidrate cutículas\n- Lixe em uma direção\n- Evite unhas muito longas (perde controle)"
   },
   {
-    "id": "a_rotina_001",
+    "id": "lib_rotina_estudo",
     "type": "library",
-    "title": "Rotina de estudo: consistência sem travar",
-    "subtitle": "Plano simples para não abandonar.",
-    "level": "Iniciante absoluto",
-    "tags": ["rotina", "consistência", "metas"],
-    "text": "# O que funciona\n- Metas pequenas\n- Repetição diária\n- Registro (mesmo simples)\n\n## Exemplo 10–15 min\n- 3 min postura + som limpo\n- 5 min técnica\n- 5 min música\n\n## Regra\nSe estiver sem tempo, faça **2 minutos**. Não quebre a cadeia."
-  },
-  {
-    "id": "a_cuidados_001",
-    "type": "library",
-    "title": "Cuidados com o violão: afinação, cordas e regulagem",
-    "subtitle": "Som e conforto dependem do instrumento estar ok.",
+    "title": "Rotina de estudo: como evoluir sem se perder",
+    "subtitle": "Estrutura simples: técnica, música e revisão.",
+    "cover": "",
     "level": "Iniciante",
-    "tags": ["cordas", "afinação", "regulagem"],
-    "text": "# Afinação\nAfine sempre antes de estudar. O ouvido aprende com referência correta.\n\n## Cordas\n- Cordas velhas perdem brilho e estabilidade\n- Troque quando o som morrer ou a afinação ficar instável\n\n## Regulagem\nSe dói demais ou trasteja muito, pode ser altura de cordas e braço.\n\nDica: um bom ajuste economiza meses de frustração."
+    "tags": ["rotina", "estudo", "planejamento"],
+    "text": "# Rotina simples (20–40 min)\n\n## 1) Aquecimento (5 min)\nCordas soltas / cromático leve\n\n## 2) Técnica (10–15 min)\nArpejos, batidas, ligados ou pestana\n\n## 3) Música real (10–15 min)\nTrechos curtos com objetivo claro\n\n## 4) Revisão (3–5 min)\nRepetir o que já melhorou para fixar\n\n**Regra:** consistência ganha de intensidade."
+  },
+  {
+    "id": "lib_pestana_sem_dor",
+    "type": "library",
+    "title": "Pestana sem dor: guia prático",
+    "subtitle": "Ajustes de ângulo, apoio e paciência inteligente.",
+    "cover": "",
+    "level": "Intermediário",
+    "tags": ["pestana", "dor", "tecnica", "mao esquerda"],
+    "text": "# Pestana sem dor\n\n## Erro comum\nApertar demais e ainda assim trastejar.\n\n## Ajustes que funcionam\n- Aproximar do traste\n- Leve rotação do indicador (use a lateral)\n- Polegar como apoio, sem esmagar\n- Quebra do punho menor (suba o violão)\n\n## Treino\n- 20 segundos segurando + 20 segundos relaxando\n- 5 ciclos\n\n**Meta:** fazer soar 2–3 cordas limpas primeiro, depois expandir."
   },
 
   {
-    "id": "m_tecnica_001",
+    "id": "mission_tecnica_7min",
     "type": "mission",
-    "title": "Técnica (7 min): som limpo em cordas soltas",
-    "subtitle": "Controle antes de velocidade.",
+    "title": "Missão Técnica (7 min): cromático limpo",
+    "subtitle": "Controle e relaxamento (sem correr).",
     "level": "Iniciante absoluto",
-    "tags": ["técnica", "som"],
+    "tags": ["tecnica", "cromatico", "saude"],
     "xp": 15,
     "minutes": 7,
-    "text": "Toque cordas soltas 6→1→6 bem devagar. Busque volume igual e ataque controlado. Se sair ruído, diminua o movimento."
+    "text": "Faça 1-2-3-4 em uma corda (bem devagar), som limpo, sem tensão. Troque de corda a cada minuto."
   },
   {
-    "id": "m_ritmo_001",
+    "id": "mission_ritmo_8min",
     "type": "mission",
-    "title": "Ritmo (8 min): batida base com metrônomo",
-    "subtitle": "Consistência rítmica é o coração do popular.",
+    "title": "Missão Ritmo (8 min): constância no 4/4",
+    "subtitle": "Pulso firme e dinâmica controlada.",
     "level": "Iniciante",
-    "tags": ["ritmo", "metrônomo"],
+    "tags": ["ritmo", "metronomo", "popular"],
     "xp": 18,
     "minutes": 8,
-    "text": "Coloque metrônomo lento. Faça a batida base por 1 minuto sem parar. Descanse 20s e repita 3 vezes."
+    "text": "Com metrônomo, faça batida simples em cordas soltas. Primeiro 60 bpm por 2 min, depois 70 bpm por 2 min e finalize com 80 bpm por 2–4 min."
   },
   {
-    "id": "m_leitura_001",
+    "id": "mission_leitura_6min",
     "type": "mission",
-    "title": "Leitura (6 min): ritmo primeiro, notas depois",
-    "subtitle": "Leitura fica fácil quando o ritmo está firme.",
+    "title": "Missão Leitura (6 min): contagem e precisão",
+    "subtitle": "Semínima e colcheia com clareza.",
     "level": "Intermediário",
-    "tags": ["leitura", "erudito"],
+    "tags": ["leitura", "ritmo", "erudito"],
     "xp": 18,
     "minutes": 6,
-    "text": "Bata palmas contando 1 e 2 e 3 e 4 e por 1 minuto. Depois toque cordas soltas no 1 e no 3. Foque em precisão."
+    "text": "Conte em voz alta 1 e 2 e 3 e 4 e e toque corda solta em cada subdivisão. Busque som uniforme e tempo estável."
   },
   {
-    "id": "m_ouvido_001",
+    "id": "mission_ouvido_7min",
     "type": "mission",
-    "title": "Ouvido (5 min): cantar antes de tocar",
-    "subtitle": "Seu ouvido guia sua mão.",
-    "level": "Iniciante",
-    "tags": ["ouvido", "musicalidade"],
-    "xp": 15,
-    "minutes": 5,
-    "text": "Escolha um trecho curto (2 compassos). Cante o ritmo e a melodia antes. Depois toque devagar tentando copiar o que cantou."
+    "title": "Missão Ouvido (7 min): cantar a tônica",
+    "subtitle": "Musicalidade e função harmônica.",
+    "level": "Intermediário",
+    "tags": ["ouvido", "harmonia", "tsd"],
+    "xp": 20,
+    "minutes": 7,
+    "text": "Toque uma progressão simples (C–F–G–C) e cante a tônica (C) por cima. Depois tente cantar a nota do acorde que está tocando."
   }
 ]
