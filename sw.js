@@ -1,7 +1,7 @@
 /* sw.js */
 "use strict";
 
-const CACHE_VERSION = "imv_vla_v1.0.0";
+const CACHE_VERSION = "imv_vla_v1.0.1";
 const STATIC_CACHE = `${CACHE_VERSION}__static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}__runtime`;
 
@@ -11,7 +11,9 @@ const STATIC_ASSETS = [
   "./styles.css",
   "./app.js",
   "./manifest.webmanifest",
-  "./packs/base/imports/content.json"
+  "./packs/base/imports/content.json",
+  "./icons/icon.svg",
+  "./icons/icon-maskable.svg"
 ];
 
 // Install: cache static assets
@@ -29,64 +31,65 @@ self.addEventListener("activate", (event) => {
     const keys = await caches.keys();
     await Promise.all(keys.map(k => {
       if (!k.startsWith(CACHE_VERSION)) return caches.delete(k);
-      return Promise.resolve();
+      return Promise.resolve(true);
     }));
     self.clients.claim();
   })());
 });
 
-// Helper: stale-while-revalidate for content.json
-async function staleWhileRevalidate(request) {
-  const cache = await caches.open(RUNTIME_CACHE);
-  const cached = await cache.match(request);
-
-  const fetchPromise = fetch(request).then(async (res) => {
-    if (res && res.ok) await cache.put(request, res.clone());
-    return res;
-  }).catch(() => null);
-
-  return cached || (await fetchPromise) || new Response("{}", { status: 200, headers: { "Content-Type": "application/json" } });
-}
-
-// Cache-first for static
-async function cacheFirst(request) {
-  const cache = await caches.open(STATIC_CACHE);
-  const cached = await cache.match(request);
-  if (cached) return cached;
-
-  try {
-    const res = await fetch(request);
-    if (res && res.ok) cache.put(request, res.clone());
-    return res;
-  } catch {
-    // Offline fallback to index for navigation requests
-    if (request.mode === "navigate") {
-      const fallback = await cache.match("./index.html");
-      if (fallback) return fallback;
-    }
-    return new Response("Offline", { status: 503 });
-  }
-}
-
+// Fetch strategy:
+// - HTML/navigation: network-first (safe updates), fallback to cache
+// - static: cache-first
+// - other: stale-while-revalidate
 self.addEventListener("fetch", (event) => {
   const req = event.request;
   const url = new URL(req.url);
 
+  if (req.method !== "GET") return;
+
   // Only handle same-origin
   if (url.origin !== self.location.origin) return;
 
-  // content.json: SWR
-  if (url.pathname.endsWith("/packs/base/imports/content.json") || url.pathname.endsWith("packs/base/imports/content.json")) {
-    event.respondWith(staleWhileRevalidate(req));
+  // Navigation requests (HTML)
+  const isNav = req.mode === "navigate" || (req.headers.get("accept") || "").includes("text/html");
+
+  if (isNav) {
+    event.respondWith((async () => {
+      try {
+        const fresh = await fetch(req);
+        const cache = await caches.open(RUNTIME_CACHE);
+        cache.put(req, fresh.clone());
+        return fresh;
+      } catch {
+        const cached = await caches.match(req);
+        return cached || (await caches.match("./index.html")) || new Response("Offline", { status: 200 });
+      }
+    })());
     return;
   }
 
-  // Navigation: return cached index.html (app uses hash routing)
-  if (req.mode === "navigate") {
-    event.respondWith(cacheFirst("./index.html"));
+  // Cache-first for known static
+  if (STATIC_ASSETS.some((p) => url.pathname.endsWith(p.replace("./", "")))) {
+    event.respondWith((async () => {
+      const cached = await caches.match(req);
+      if (cached) return cached;
+      const fresh = await fetch(req);
+      const cache = await caches.open(STATIC_CACHE);
+      cache.put(req, fresh.clone());
+      return fresh;
+    })());
     return;
   }
 
-  // Static assets: cache-first
-  event.respondWith(cacheFirst(req));
+  // Stale-while-revalidate for others
+  event.respondWith((async () => {
+    const cached = await caches.match(req);
+    const fetchPromise = fetch(req).then(async (fresh) => {
+      const cache = await caches.open(RUNTIME_CACHE);
+      cache.put(req, fresh.clone());
+      return fresh;
+    }).catch(() => cached);
+
+    return cached || fetchPromise;
+  })());
 });
