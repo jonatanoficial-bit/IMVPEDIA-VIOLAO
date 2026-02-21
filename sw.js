@@ -1,7 +1,7 @@
 /* sw.js */
 "use strict";
 
-const CACHE_VERSION = "imv_vla_v1.0.1";
+const CACHE_VERSION = "imv_vla_v1.0.2";
 const STATIC_CACHE = `${CACHE_VERSION}__static`;
 const RUNTIME_CACHE = `${CACHE_VERSION}__runtime`;
 
@@ -13,7 +13,9 @@ const STATIC_ASSETS = [
   "./manifest.webmanifest",
   "./packs/base/imports/content.json",
   "./icons/icon.svg",
-  "./icons/icon-maskable.svg"
+  "./icons/icon-maskable.svg",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png"
 ];
 
 // Install: cache static assets
